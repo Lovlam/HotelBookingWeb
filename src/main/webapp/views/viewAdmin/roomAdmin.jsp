@@ -5,7 +5,7 @@
 <html lang="en">
 
 <head>
-  <title>Danh sách nhân viên | Quản trị Admin</title>
+  <title>Danh sách phòng | Quản trị Admin</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -78,7 +78,7 @@
   <main class="app-content">
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb side">
-        <li class="breadcrumb-item active"><a href="#"><b>Danh sách khách sạn</b></a></li>
+        <li class="breadcrumb-item active"><a href="#"><b>Danh sách phòng</b></a></li>
       </ul>
       <div id="clock"></div>
     </div>
@@ -91,8 +91,8 @@
             <div class="row element-button">
               <div class="col-sm-2">
 
-                <a class="btn btn-add btn-sm" href="/Web_Assignment/admin/hotel/add" title="Thêm"><i class="fas fa-plus"></i>
-                  Tạo mới khách sạn</a>
+                <a class="btn btn-add btn-sm" href="/Web_Assignment/admin/room/add" title="Thêm"><i class="fas fa-plus"></i>
+                  Tạo mới phòng</a>
               </div>
               <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
@@ -120,33 +120,53 @@
                     class="fas fa-trash-alt"></i> Xóa tất cả</a>
               </div>
             </div>
+            <div class="row">
+            	<div class="form-group col-md-6">
+				    <label for="secltHotel" class="control-label">Khách Sạn</label>
+				    <select id="secltHotel" name="secltHotel" class="form-control">
+				    	<option value="all">Tất cả</option>
+				        <c:forEach var="hotel" items="${listHotel}">
+				        
+							<option value="${hotel.name}">${hotel.name}</option>
+						</c:forEach>
+				    </select>
+				</div>
+			<div class="form-group col-md-6">
+			    <label for="roomType" class="control-label">Loại phòng</label>
+			    <select id="roomType" name="roomType" class="form-control">
+			    	<option value="all">Tất cả</option>
+			    	<c:forEach var="room" items="${listRoom}">
+							<option value="${room.roomType}">${room.roomType}</option>
+						</c:forEach>
+			        <!-- Thêm các loại phòng khác nếu cần -->
+			    </select>
+            </div>
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
               id="sampleTable">
               <thead>
-                <tr>
-                  <th width="10"><input type="checkbox" id="all"></th>
-                  <th width="100">ID khách sạn</th>
-                  <th width="180">Tên khách sạn</th>
-                  <th width="150">Ảnh</th>
-                  <th width="200">Địa chỉ</th>
-                  <th width="60">Số sao</th>
+                <tr>                 
+                  <th width="80">Mã phòng</th>
+                  <th width="130">Tên khách sạn</th>
+                  <th width="130">Loại phòng</th>
+                  <th width="100">Giá</th>
+                  <th width="90">Trạng thái</th>
                   <th width="190">Mô tả</th>
                   <th width="80">Chức năng</th>
                 </tr>
               </thead>
               <tbody>
                 
-				<c:forEach var="hotel" items="${listHotel}">
+				<c:forEach var="room" items="${listRoom}">
 					<tr>
                   <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                  <td>${hotel.hotelID}</td>
+                  <td>${room.roomID}</td>
                   <td>${hotel.name}</td>
-                  <td><img class="img-card-person" src="/Web_Assignment/files/images/${hotel.imageURL}" alt=""></td>
-                  <td>${hotel.location} </td>
-                  <td>${hotel.stars}</td>
-                  <td>${hotel.description}</td>
+                  <td>${room.roomType}</td>
+                  <td>${room.price}</td>
+                  <td>${room.roomType}</td>
+                  <td>${room.isBooking} </td>
                   <td class="table-td-center"><button class="btn btn-primary btn-sm trash" type="button"  title="Xóa"
-                     ><i class="fas fa-trash-alt" onclick="deleteHotel(${hotel.hotelID})"></i>
+                     ><i class="fas fa-trash-alt" onclick="deleteHotel(${room.roomID})"></i>
                     </button>
                     <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
                       data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
@@ -169,19 +189,19 @@
   data-keyboard="false">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <form action="/Web_Assignment/admin/hotel/edit" method="post" enctype="multipart/form-data">
+      <form action="/Web_Assignment/admin/room/edit" method="post" enctype="multipart/form-data">
       	<div class="modal-body">
         <div class="row">
           <div class="form-group col-md-12">
             <span class="thong-tin-thanh-toan">
-              <h5>Chỉnh sửa thông tin Khách sạn</h5>
+              <h5>Chỉnh sửa thông tin Phòng</h5>
             </span>
           </div>
         </div>
         <div class="row">
           <div class="form-group col-md-6">
             <label class="control-label">Tên khách sạn</label>
-            <input id="hotelName" name="hotelName" class="form-control" type="text" required>
+            <input id="roomName" name="roomName" class="form-control" type="text" required>
           </div>
           <div class="form-group col-md-6">
             <label class="control-label">Địa chỉ</label>
@@ -232,6 +252,13 @@
 <script src="/Web_Assignment/views/viewAdmin/js/plugins/dataTables.bootstrap.min.js"></script>
 
 <script>
+	document.getElementById("roomType").addEventListener("change", function() {
+	    var selectedRoomType = this.value; // Lấy giá trị của loại phòng đã chọn
+	    var redirectURL = "/Web_Assignment/admin/room?roomType=" + selectedRoomType; // Đường dẫn mới với loại phòng đã chọn
+	    window.location.href = redirectURL; // Chuyển hướng trang
+	});
+
+
   function deleteHotel(hotelID) {
     swal({
       title: "Cảnh báo",
@@ -305,7 +332,7 @@
 	    $(".edit").click(function () {
 	        // Lấy thông tin từ hàng tương ứng trong bảng
 	        var hotelID = $(this).closest("tr").find("td:eq(1)").text();
-	        var hotelName = $(this).closest("tr").find("td:eq(2)").text();
+	        var roomName = $(this).closest("tr").find("td:eq(2)").text();
 	        var hotelLocation = $(this).closest("tr").find("td:eq(4)").text();
 	        var hotelStars = $(this).closest("tr").find("td:eq(5)").text();
 	        var hotelImageURL = $(this).closest("tr").find("td:eq(3) img").attr("src");
@@ -317,7 +344,7 @@
 
 	        // Đặt giá trị vào các input của modal
 	        $("#hotelID").val(hotelID);
-	        $("#hotelName").val(hotelName);
+	        $("#roomName").val(roomName);
 	        $("#hotelLocation").val(hotelLocation);
 	        $("#hotelStars").val(hotelStars); // Đặt giá trị cho hotelStarsEdit
 	        $("#hotelImage").attr("src", selectedImageURL || hotelImageURL); // Sử dụng selectedImageURL nếu có, nếu không sử dụng hotelImageURL

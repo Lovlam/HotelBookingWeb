@@ -69,4 +69,14 @@
     <servlet-name>HotelServlet</servlet-name>
     <url-pattern>/HotelServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RoomRepository</display-name>
+    <servlet-name>RoomRepository</servlet-name>
+    <servlet-class>com.poly.Repository.RoomRepository</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RoomRepository</servlet-name>
+    <url-pattern>/RoomRepository</url-pattern>
+  </servlet-mapping>
 </web-app>

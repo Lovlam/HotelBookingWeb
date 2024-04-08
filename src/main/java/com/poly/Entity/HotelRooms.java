@@ -26,7 +26,7 @@ public class HotelRooms {
     private String roomType;
 
     @Column(name = "Price")
-    private String price;
+    private Double price;
     
     @ManyToOne
     @JoinColumn(name = "ImgID")
@@ -66,11 +66,11 @@ public class HotelRooms {
         this.roomType = roomType;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
