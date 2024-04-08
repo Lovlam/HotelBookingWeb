@@ -3,6 +3,7 @@ package com.poly.Repository;
 import java.util.List;
 
 import com.poly.Entity.Account;
+import com.poly.Entity.Hotels;
 import com.poly.JPAConfig.JpaConfig;
 
 import jakarta.persistence.EntityTransaction;
@@ -91,15 +92,16 @@ public class AccountRepository implements IAcountRepository{
 
 	@Override
 	public Account findByEmailAndPassword(String email, String password) {
-		try {
-	        return em.createQuery("SELECT a FROM Account a WHERE a.Email = :email AND a.Password = :password", Account.class)
-	                 .setParameter("email", email)
-	                 .setParameter("password", password)
-	                 .getSingleResult();
-	    } catch (Exception e) {
-	        // This exception is thrown if there is no result
-	        return null;
-	    } 
+		List<Account> result = em.createQuery("SELECT a FROM Account a WHERE a.email = :email AND a.password = :password", Account.class)
+			    .setParameter("email", email)
+			    .setParameter("password", password)
+			    .getResultList();
+		if(result.size() == 1) {
+			return result.get(0);
+		}else {
+			return null ;
+		}
+			 
 	}
 
 }

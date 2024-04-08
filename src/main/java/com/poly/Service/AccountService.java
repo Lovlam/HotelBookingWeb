@@ -22,12 +22,12 @@ public class AccountService {
 	
 	public Account login(String email, String password) throws Exception {
 		Account account = accountRepository.findByEmailAndPassword(email, password);
+		System.out.println(accountRepository.findByEmailAndPassword(email, password));
         if(account == null) {
-			/* throw new Exception("Invalid credentials."); */
             return null;
         }
         return account;
 	}
-
+	
 	
 }

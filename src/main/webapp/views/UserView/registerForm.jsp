@@ -51,6 +51,7 @@
             <h1>${message}</h1>
             <hr>
             <button type="submit" class="btn btn-success">Register</button>
+            <a type="submit" class="btn btn-success" href="/Web_Assignment/login">Sign Up</a>
         </form>
     </div>
 </body>

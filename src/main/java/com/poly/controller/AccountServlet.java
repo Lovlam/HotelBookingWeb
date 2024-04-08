@@ -15,7 +15,6 @@ import com.poly.Service.AccountService;
 public class AccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AccountService accountService = new AccountService();
-
     public AccountServlet() {
         super();
         
@@ -32,7 +31,12 @@ public class AccountServlet extends HttpServlet {
 				e.printStackTrace();
 			}
     	}else if(uri.contains("login")) {
-    		
+    			try {
+					login(request, response);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
     	}
     }
     
@@ -41,9 +45,9 @@ public class AccountServlet extends HttpServlet {
     	String uri = request.getRequestURI();
     	
     	if(uri.contains("register")) {
-    		request.getRequestDispatcher("views/registerForm.jsp").forward(request, response);
+    		request.getRequestDispatcher("views/UserView/registerForm.jsp").forward(request, response);
     	}else if(uri.contains("login")) {
-    		request.getRequestDispatcher("views/login.html").forward(request, response);
+    		request.getRequestDispatcher("views/ViewLogin/index.jsp").forward(request, response);
     	}
     	
     }
@@ -61,14 +65,30 @@ public class AccountServlet extends HttpServlet {
     	Account checklogin = accountService.register(account);
     	if(checklogin == null) {
     		request.setAttribute("message", "email da ton tai");
-    		request.getRequestDispatcher("views/registerForm.jsp").forward(request, response);
+    		request.getRequestDispatcher("views/UserView/registerForm.jsp").forward(request, response);
     	}else {
-    		request.getRequestDispatcher("views/login.html").forward(request, response);
+    		request.getRequestDispatcher("views/ViewLogin/index.html").forward(request, response);
     	}
     	
     }
-
-	
+    
+    public void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    	String emailStr = request.getParameter("email");
+    	String pass = request.getParameter("pass"); 
+    	Account account = accountService.login(emailStr, pass);
+    	if(account == null) {	
+    		request.setAttribute("erro", "Đăng nhập thất bại");
+    		request.getRequestDispatcher("views/ViewLogin/index.jsp").forward(request, response);
+    	} else {
+    		if(account.isManager() == true) {
+    			request.setAttribute("erro", "Đăng nhập thành công với admin"); 
+    			request.getRequestDispatcher("views/ViewLogin/index.jsp").forward(request, response);
+    		}else if(account.isManager() == false){
+    			request.setAttribute("erro", "Đăng nhập thành công với user"); 
+    			request.getRequestDispatcher("views/ViewLogin/index.jsp").forward(request, response);
+    		}
+    	}
+    }
 
 
 
