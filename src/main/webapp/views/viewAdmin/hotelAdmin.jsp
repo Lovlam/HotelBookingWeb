@@ -148,8 +148,8 @@
                   <td>${hotel.location} </td>
                   <td>${hotel.stars}</td>
                   <td>${hotel.description}</td>
-                  <td class="table-td-center"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                     ><i class="fas fa-trash-alt"></i>
+                  <td class="table-td-center"><button class="btn btn-primary btn-sm trash" type="button"  title="Xóa"
+                     ><i class="fas fa-trash-alt" onclick="deleteHotel(${hotel.hotelID})"></i>
                     </button>
                     <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
                       data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
@@ -167,174 +167,188 @@
 
   <!--
   MODAL
--->
-  <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-    data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-
-        <div class="modal-body">
-          <div class="row">
-            <div class="form-group  col-md-12">
-              <span class="thong-tin-thanh-toan">
-                <h5>Chỉnh sửa thông tin nhân viên cơ bản</h5>
-              </span>
-            </div>
+--><!-- Modal -->
+<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+  data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form action="/Web_Assignment/admin/hotel/edit" method="post" enctype="multipart/form-data">
+      	<div class="modal-body">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <span class="thong-tin-thanh-toan">
+              <h5>Chỉnh sửa thông tin Khách sạn</h5>
+            </span>
           </div>
-          <div class="row">
-            <div class="form-group col-md-6">
-              <label class="control-label">ID nhân viên</label>
-              <input class="form-control" type="text" required value="#CD2187" disabled>
-            </div>
-            <div class="form-group col-md-6">
-              <label class="control-label">Họ và tên</label>
-              <input class="form-control" type="text" required value="Võ Trường">
-            </div>
-            <div class="form-group  col-md-6">
-              <label class="control-label">Số điện thoại</label>
-              <input class="form-control" type="number" required value="09267312388">
-            </div>
-            <div class="form-group col-md-6">
-              <label class="control-label">Địa chỉ email</label>
-              <input class="form-control" type="text" required value="truong.vd2000@gmail.com">
-            </div>
-            <div class="form-group col-md-6">
-              <label class="control-label">Ngày sinh</label>
-              <input class="form-control" type="date" value="15/03/2000">
-            </div>
-            <div class="form-group  col-md-6">
-              <label for="exampleSelect1" class="control-label">Chức vụ</label>
-              <select class="form-control" id="exampleSelect1">
-                <option>Bán hàng</option>
-                <option>Tư vấn</option>
-                <option>Dịch vụ</option>
-                <option>Thu Ngân</option>
-                <option>Quản kho</option>
-                <option>Bảo trì</option>
-                <option>Kiểm hàng</option>
-                <option>Bảo vệ</option>
-                <option>Tạp vụ</option>
-              </select>
-            </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label class="control-label">Tên khách sạn</label>
+            <input id="hotelName" name="hotelName" class="form-control" type="text" required>
           </div>
-          <BR>
-          <a href="#" style="    float: right;
-        font-weight: 600;
-        color: #ea0000;">Chỉnh sửa nâng cao</a>
-          <BR>
-          <BR>
-          <button class="btn btn-save" type="button">Lưu lại</button>
-          <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-          <BR>
+          <div class="form-group col-md-6">
+            <label class="control-label">Địa chỉ</label>
+            <input id="hotelLocation" name="hotelLocation" class="form-control" type="text" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="exampleSelect1" class="control-label">Loại khách sạn</label>
+            <select id="hotelStars" name="hotelStars" class="form-control">
+              <option value="1">1 sao</option>
+              <option value="2">2 sao</option>
+              <option value="3">3 sao</option>
+              <option value="4">4 sao</option>
+              <option value="5">5 sao</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label class="control-label">Mô tả</label>
+            <textarea id="hotelDescription" name="hotelDescription" class="form-control" rows="3"></textarea>
+          </div>
+          <div class="form-group col-md-6">
+            <img alt="" src="" name="hotelImage" id="hotelImage" style="width: 250px;">
+          </div>
+          <input id="choicefle" name="hotelImage" class="form-control" type="file" >
         </div>
-        <div class="modal-footer">
-        </div>
+        <br>
+        <br>
+        <br>
+        <button id="saveButton" class="btn btn-save" type="submit">Lưu lại</button>
+        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+        <br>
       </div>
+      </form>
+      <div class="modal-footer"></div>
     </div>
   </div>
+</div>
+
   <!--
   MODAL
 -->
 
-  <!-- Essential javascripts for application to work-->
-  <script src="js/jquery-3.2.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="src/jquery.table2excel.js"></script>
-  <script src="js/main.js"></script>
-  <!-- The javascript plugin to display page loading on top-->
-  <script src="js/plugins/pace.min.js"></script>
-  <!-- Page specific javascripts-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-  <!-- Data table plugin-->
-  <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
-  <script>
-    
-  function deleteRow(r) {
-      var i = r.parentNode.parentNode.rowIndex;
-      document.getElementById("myTable").deleteRow(i);
-    }
-    jQuery(function () {
-      jQuery(".trash").click(function () {
-        swal({
-          title: "Cảnh báo",
-         
-          text: "Bạn có chắc chắn là muốn xóa nhân viên này?",
-          buttons: ["Hủy bỏ", "Đồng ý"],
-        })
-          .then((willDelete) => {
-            if (willDelete) {
-              swal("Đã xóa thành công.!", {
-                
+  <script src="/Web_Assignment/views/viewAdmin/js/jquery-3.2.1.min.js"></script>
+<script src="/Web_Assignment/views/viewAdmin/js/popper.min.js"></script>
+<script src="/Web_Assignment/views/viewAdmin/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script src="/Web_Assignment/views/viewAdmin/js/plugins/jquery.dataTables.min.js"></script>
+<script src="/Web_Assignment/views/viewAdmin/js/plugins/dataTables.bootstrap.min.js"></script>
+
+<script>
+  function deleteHotel(hotelID) {
+    swal({
+      title: "Cảnh báo",
+      text: "Bạn có chắc chắn muốn xóa khách sạn này?",
+      buttons: ["Hủy bỏ", "Đồng ý"],
+    }).then((willDelete) => {
+      if (willDelete) {
+        // Gửi yêu cầu DELETE đến URL endpoint
+        $.ajax({
+          url: "/Web_Assignment/admin/hotel/delete?id=" + hotelID,
+          success: function(response) {
+            // Xử lý phản hồi từ máy chủ
+            swal("Đã xóa thành công!", { icon: "success" })
+              .then((value) => {
+                // Tải lại trang hoặc cập nhật dữ liệu khách sạn
+                window.location.href = "/Web_Assignment/admin/hotel";
               });
-            }
-          });
-      });
-    });
-
-
-
-
-    //Thời Gian
-    function time() {
-      var today = new Date();
-      var weekday = new Array(7);
-      weekday[0] = "Chủ Nhật";
-      weekday[1] = "Thứ Hai";
-      weekday[2] = "Thứ Ba";
-      weekday[3] = "Thứ Tư";
-      weekday[4] = "Thứ Năm";
-      weekday[5] = "Thứ Sáu";
-      weekday[6] = "Thứ Bảy";
-      var day = weekday[today.getDay()];
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
-      var h = today.getHours();
-      var m = today.getMinutes();
-      var s = today.getSeconds();
-      m = checkTime(m);
-      s = checkTime(s);
-      nowTime = h + " giờ " + m + " phút " + s + " giây";
-      if (dd < 10) {
-        dd = '0' + dd
-      }
-      if (mm < 10) {
-        mm = '0' + mm
-      }
-      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-        '</span>';
-      document.getElementById("clock").innerHTML = tmp;
-      clocktime = setTimeout("time()", "1000", "Javascript");
-
-      function checkTime(i) {
-        if (i < 10) {
-          i = "0" + i;
-        }
-        return i;
-      }
-    }
-
-
-    $(document).ready(function() {
-        $(".edit").on("click", function () {
-            // Tìm phần tử cha chứa nút chỉnh sửa được nhấn
-            var parentRow = $(this).closest("tr");
-            
-            // Lấy giá trị ID của nhân viên từ cột thứ hai trong hàng cha
-            var employeeID = parentRow.find("td:eq(1)").text();
-            
-            // Hiển thị giá trị ID trong input ID nhân viên trong modal
-            $("#ModalUP").find(".form-group input[type='text']").val(employeeID);
-            
-            // Mở modal
-            $("#ModalUP").modal("show");
+          },
+          error: function(xhr, status, error) {
+            swal("Có lỗi xảy ra khi xóa khách sạn!", { icon: "error" });
+          }
         });
+      }
     });
-  </script>
+  }
+
+  function time() {
+    var today = new Date();
+    var weekday = new Array(7);
+    weekday[0] = "Chủ Nhật";
+    weekday[1] = "Thứ Hai";
+    weekday[2] = "Thứ Ba";
+    weekday[3] = "Thứ Tư";
+    weekday[4] = "Thứ Năm";
+    weekday[5] = "Thứ Sáu";
+    weekday[6] = "Thứ Bảy";
+    var day = weekday[today.getDay()];
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    nowTime = h + " giờ " + m + " phút " + s + " giây";
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+    today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+    tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+      '</span>';
+    document.getElementById("clock").innerHTML = tmp;
+    clocktime = setTimeout("time()", "1000", "Javascript");
+
+    function checkTime(i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
+    }
+  }
+
+  $(document).ready(function () {
+	    // Biến toàn cục để lưu trữ đường dẫn của hình ảnh đã chọn trước đó
+	    var selectedImageURL = "";
+
+	    $(".edit").click(function () {
+	        // Lấy thông tin từ hàng tương ứng trong bảng
+	        var hotelID = $(this).closest("tr").find("td:eq(1)").text();
+	        var hotelName = $(this).closest("tr").find("td:eq(2)").text();
+	        var hotelLocation = $(this).closest("tr").find("td:eq(4)").text();
+	        var hotelStars = $(this).closest("tr").find("td:eq(5)").text();
+	        var hotelImageURL = $(this).closest("tr").find("td:eq(3) img").attr("src");
+	        var hotelDescription = $(this).closest("tr").find("td:eq(6)").text();
+	        var saveButton = $("#saveButton"); // Lấy đối tượng của nút "Lưu lại"
+
+	        // Đặt giá trị hotelID vào thuộc tính formaction của nút "Lưu lại"
+	        saveButton.attr("formaction", "/Web_Assignment/admin/hotel/edit?id=" + hotelID);
+
+	        // Đặt giá trị vào các input của modal
+	        $("#hotelID").val(hotelID);
+	        $("#hotelName").val(hotelName);
+	        $("#hotelLocation").val(hotelLocation);
+	        $("#hotelStars").val(hotelStars); // Đặt giá trị cho hotelStarsEdit
+	        $("#hotelImage").attr("src", selectedImageURL || hotelImageURL); // Sử dụng selectedImageURL nếu có, nếu không sử dụng hotelImageURL
+	        $("#hotelDescription").val(hotelDescription);
+	        
+	        // Mở modal
+	        $("#ModalUP").modal("show");
+	    });
+
+	    $("#choicefle").change(function(){
+	        readURL(this);
+	    });
+
+	    // Hiển thị hình ảnh đã chọn và cập nhật selectedImageURL
+	    function readURL(input) {
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	            reader.onload = function (e) {
+	                $('#hotelImage').attr('src', e.target.result);
+	                selectedImageURL = e.target.result; // Cập nhật selectedImageURL với đường dẫn mới
+	            }
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+	});
+
+</script>
+
 </body>
 
 </html>

@@ -35,9 +35,10 @@ public class AdminServlet extends HttpServlet {
         	System.out.println("ADD GET");
         	request.getRequestDispatcher("/views/viewAdmin/addHotel.html").forward(request, response);
         }else if(path.contains("/hotel/delete")) {
-        	
-        }else if(path.contains("/hotel/update")) {
-        	
+        	deleteHotel(request, response);
+        }else if(path.contains("/hotel/edit")) {
+        	System.out.println("GET EDIT");
+        	editHotel(request, response);
         }else {
         	request.setAttribute("listHotel", showAllHotel(request, response));
         	request.getRequestDispatcher("/views/viewAdmin/hotelAdmin.jsp").forward(request, response);
@@ -55,18 +56,44 @@ public class AdminServlet extends HttpServlet {
         	addHotel(request,response);
         }else if(path.contains("/hotel/delete")) {
         	
-        }else if(path.contains("/hotel/update")) {
-        	
+        }else if(path.contains("/hotel/edit")) {
+        	System.out.println("POST EDIT");
+        	editHotel(request, response);
         }
 	}
 	
 	private void editHotel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		String baseDirectory = getServletContext().getRealPath("/") + "files";
+		int hotelId = Integer.parseInt(request.getParameter("id"));
+		Hotels newHotel = new Hotels();
+		newHotel.setName(request.getParameter("hotelName"));
+		newHotel.setLocation(request.getParameter("hotelLocation"));
+		newHotel.setStars(Integer.parseInt(request.getParameter("hotelStars")));
+		newHotel.setDescription(request.getParameter("hotelDescription"));
+		newHotel.setDelete(false);
+		String hotelPhoto = FileUploader.uploadFile(request, response, baseDirectory ,"hotelImage");
+		System.out.println(hotelPhoto);
+		newHotel.setImageURL(hotelPhoto);
 		
+		Hotels hotel = hotelService.editHotel(newHotel,hotelId);
+		System.out.println(hotel);
+		if(hotel == null) {
+			request.setAttribute("listHotel", showAllHotel(request, response));
+		}else {
+			request.setAttribute("listHotel", showAllHotel(request, response));
+		}
+		request.getRequestDispatcher("/views/viewAdmin/hotelAdmin.jsp").forward(request, response);
 	}
 
 
 	private void deleteHotel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		int hotelId = Integer.parseInt(request.getParameter("id"));
+	    Hotels hotel = hotelService.deleteHotel(hotelId);
+	    if(hotel == null) {
+	        response.setStatus(404);
+	    } else {
+	        response.setStatus(200);
+	    }
 		
 	}
 
