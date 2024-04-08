@@ -12,4 +12,5 @@ public interface IAcountRepository {
     void updateAccount(Account account);
     void deleteAccount(int accountId);
     List<Account> findAllAccounts();
+
 }

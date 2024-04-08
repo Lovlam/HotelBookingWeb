@@ -25,13 +25,29 @@ public class HotelService {
 		}
 	}
 	
-	public Hotels updateHotel(Hotels hotel) {
-		return null;
-	}
 	
 	public Hotels deleteHotel(int id) {
+		Hotels finHotel = hotelRepository.findHotelById(id);
+		if(finHotel != null) {
+			hotelRepository.deleteHotel(id);
+			return finHotel;
+		}
 		return null;
 	}
+
+	public Hotels editHotel(Hotels oldHotel,int hotelId) {
+		Hotels finHotel = hotelRepository.findHotelById(hotelId);
+		if(finHotel != null) {
+			oldHotel.setHotelID(finHotel.getHotelID());
+			if(oldHotel.getImageURL() == null) {
+				oldHotel.setImageURL(finHotel.getImageURL());
+			}
+			hotelRepository.updateHotel(oldHotel);
+			return oldHotel;
+		}
+		return null;
+	}
+
 	
 	
 }

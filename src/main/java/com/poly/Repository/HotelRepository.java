@@ -80,4 +80,12 @@ public class HotelRepository implements IHotelRepository{
 		return result;
 	}
 
+	public Hotels findHotelById(int id) {
+		List<Hotels> result = em.createQuery("SELECT a FROM Hotels a WHERE a.hotelID = :hotelID", Hotels.class)
+		         .setParameter("hotelID", id)
+		         .getResultList();
+		if(result.size() > 0) return result.get(0);
+		return null;
+	}
+
 }

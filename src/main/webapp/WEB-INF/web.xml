@@ -41,16 +41,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>hu</display-name>
-    <servlet-name>hu</servlet-name>
-    <servlet-class>com.poly.Service.hu</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>hu</servlet-name>
-    <url-pattern>/hu</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>AdminServlet</display-name>
     <servlet-name>AdminServlet</servlet-name>
     <servlet-class>com.poly.controller.AdminServlet</servlet-class>
