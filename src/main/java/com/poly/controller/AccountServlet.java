@@ -6,10 +6,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Base64.Encoder;
 import java.util.List;
 
 import com.poly.Entity.Account;
 import com.poly.Service.AccountService;
+
+import Utils.Encode;
 
 @WebServlet({"/register","/login" , "/fpass"})
 public class AccountServlet extends HttpServlet {
@@ -65,7 +68,8 @@ public class AccountServlet extends HttpServlet {
     	Account account = new Account();
     	account.setName(request.getParameter("Name"));
     	account.setEmail(request.getParameter("Email"));
-    	account.setPassword(request.getParameter("Password"));
+    	String password = Encode.toSHA1(request.getParameter("Password"));
+    	account.setPassword(password);
     	account.setPhone(request.getParameter("Phone"));
     	account.setAddress(request.getParameter("Address"));
     	account.setManager(false);
@@ -85,7 +89,7 @@ public class AccountServlet extends HttpServlet {
     
     public void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
     	String emailStr = request.getParameter("email");
-    	String pass = request.getParameter("pass"); 
+    	String pass = Encode.toSHA1(request.getParameter("pass")); 
     	Account account = accountService.login(emailStr, pass);
     	if(account == null) {	
     		request.setAttribute("erro", "Đăng nhập thất bại");

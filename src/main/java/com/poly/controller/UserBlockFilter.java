@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import com.poly.Entity.Account;
 
-@WebFilter(urlPatterns = { "/admin/*" })
+/*@WebFilter(urlPatterns = { "/admin/*" })*/
 public class UserBlockFilter extends HttpFilter implements Filter {
        
 
