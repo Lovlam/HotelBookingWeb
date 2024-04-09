@@ -50,7 +50,8 @@
       </div>
     </div>
     <hr>
-    <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
+    <ul class="app-menu">
+      <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
           <span class="app-menu__label">Hóa đơn</span></a></li>
       <li><a class="app-menu__item active" href="index.html"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
@@ -124,23 +125,22 @@
             	<div class="form-group col-md-6">
 				    <label for="secltHotel" class="control-label">Khách Sạn</label>
 				    <select id="secltHotel" name="secltHotel" class="form-control">
-				    	<option value="all">Tất cả</option>
+				        <option value="all">Tất cả</option>
 				        <c:forEach var="hotel" items="${listHotel}">
-				        
-							<option value="${hotel.name}">${hotel.name}</option>
-						</c:forEach>
+				            <option value="${hotel.name}" data-hotel="${hotel.name}">${hotel.name}</option>
+				        </c:forEach>
 				    </select>
 				</div>
-			<div class="form-group col-md-6">
-			    <label for="roomType" class="control-label">Loại phòng</label>
-			    <select id="roomType" name="roomType" class="form-control">
-			    	<option value="all">Tất cả</option>
-			    	<c:forEach var="room" items="${listRoom}">
-							<option value="${room.roomType}">${room.roomType}</option>
-						</c:forEach>
-			        <!-- Thêm các loại phòng khác nếu cần -->
-			    </select>
-            </div>
+				<div class="form-group col-md-6">
+				    <label for="roomType" class="control-label">Loại phòng</label>
+				    <select id="roomType" name="roomType" class="form-control">
+				        <option value="all">Tất cả</option>
+				        <c:forEach var="room" items="${listRoom}">
+				            <option value="${room.roomType}" data-hotel="${room.getHotelName()}" data-room-type="${room.roomType}">${room.roomType}</option>
+				        </c:forEach>
+				    
+				    </select>
+				</div>
             <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
               id="sampleTable">
               <thead>
@@ -158,20 +158,21 @@
                 
 				<c:forEach var="room" items="${listRoom}">
 					<tr>
-                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                  <td>${room.roomID}</td>
-                  <td>${hotel.name}</td>
-                  <td>${room.roomType}</td>
-                  <td>${room.price}</td>
-                  <td>${room.roomType}</td>
-                  <td>${room.isBooking} </td>
-                  <td class="table-td-center"><button class="btn btn-primary btn-sm trash" type="button"  title="Xóa"
-                     ><i class="fas fa-trash-alt" onclick="deleteHotel(${room.roomID})"></i>
-                    </button>
-                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                      data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
-                    </button>
-                  </td>
+		                  <td>${room.roomID}</td>
+		                  <td>${room.getHotelName()} </td>
+		                  <td>${room.roomType}</td>
+		                  <td>${room.price}</td>
+		                  <td>${room.isBooking() == true ?
+						        '<span class="btn btn-primary btn-sm trash">Đã đặt</span>' :
+						        '<span class="badge bg-success">Còn trống</span>'}
+						   </td>
+						   <td>${room.description}</td>
+		                  <td class="table-td-center"><button class="btn btn-primary btn-sm trash" type="button"  title="Xóa"
+		                     ><i class="fas fa-trash-alt" onclick="deleteRoom(${room.roomID})"></i>
+		                    </button>
+		                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
+		                    </button>
+		                  </td>
                 </tr>
 				</c:forEach>
               </tbody>
@@ -185,59 +186,57 @@
   <!--
   MODAL
 --><!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
   data-keyboard="false">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <form action="/Web_Assignment/admin/room/edit" method="post" enctype="multipart/form-data">
-      	<div class="modal-body">
-        <div class="row">
-          <div class="form-group col-md-12">
-            <span class="thong-tin-thanh-toan">
-              <h5>Chỉnh sửa thông tin Phòng</h5>
-            </span>
+      <form id="editForm" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <span class="thong-tin-thanh-toan">
+                <h5>Chỉnh sửa thông tin Phòng</h5>
+              </span>
+            </div>
           </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label class="control-label">Loại phòng</label>
+              <input id="TypeRoom" name="roomType" class="form-control" type="text" required>
+            </div>
+            <div class="form-group col-md-12">
+              <label class="control-label">Giá</label>
+              <input id="price" name="price" class="form-control" type="number" required>
+            </div>
+            
+            <div class="form-group col-md-12">
+              <label class="control-label">Trạng thái</label>
+              <select id="status" name="status" class="form-control">
+                <option value="available">Còn trống</option>
+                <option value="booked">Đã đặt</option>
+              </select>
+            </div>
+            <div class="form-group col-md-12">
+              <label class="control-label">Mô tả</label>
+              <textarea id="description" name="description" class="form-control" rows="3"></textarea>
+            </div>
+            <input id="roomId" name="roomId" type="hidden">
+          </div>
+          
+          <br>
+          <br>
+          <br>
+          <button id="saveButton" class="btn btn-save" type="button" onclick="submitForm()">Lưu lại</button>
+          <button class="btn btn-cancel" data-dismiss="modal" type="button">Hủy bỏ</button>
+          <br>
         </div>
-        <div class="row">
-          <div class="form-group col-md-6">
-            <label class="control-label">Tên khách sạn</label>
-            <input id="roomName" name="roomName" class="form-control" type="text" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label class="control-label">Địa chỉ</label>
-            <input id="hotelLocation" name="hotelLocation" class="form-control" type="text" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="exampleSelect1" class="control-label">Loại khách sạn</label>
-            <select id="hotelStars" name="hotelStars" class="form-control">
-              <option value="1">1 sao</option>
-              <option value="2">2 sao</option>
-              <option value="3">3 sao</option>
-              <option value="4">4 sao</option>
-              <option value="5">5 sao</option>
-            </select>
-          </div>
-          <div class="form-group col-md-6">
-            <label class="control-label">Mô tả</label>
-            <textarea id="hotelDescription" name="hotelDescription" class="form-control" rows="3"></textarea>
-          </div>
-          <div class="form-group col-md-6">
-            <img alt="" src="" name="hotelImage" id="hotelImage" style="width: 250px;">
-          </div>
-          <input id="choicefle" name="hotelImage" class="form-control" type="file" >
-        </div>
-        <br>
-        <br>
-        <br>
-        <button id="saveButton" class="btn btn-save" type="submit">Lưu lại</button>
-        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-        <br>
-      </div>
       </form>
       <div class="modal-footer"></div>
     </div>
   </div>
 </div>
+
 
   <!--
   MODAL
@@ -252,29 +251,26 @@
 <script src="/Web_Assignment/views/viewAdmin/js/plugins/dataTables.bootstrap.min.js"></script>
 
 <script>
-	document.getElementById("roomType").addEventListener("change", function() {
-	    var selectedRoomType = this.value; // Lấy giá trị của loại phòng đã chọn
-	    var redirectURL = "/Web_Assignment/admin/room?roomType=" + selectedRoomType; // Đường dẫn mới với loại phòng đã chọn
-	    window.location.href = redirectURL; // Chuyển hướng trang
-	});
 
 
-  function deleteHotel(hotelID) {
+  function deleteRoom(roomID) {
+
     swal({
       title: "Cảnh báo",
-      text: "Bạn có chắc chắn muốn xóa khách sạn này?",
+      text: "Bạn có chắc chắn muốn xóa phòng này?",
       buttons: ["Hủy bỏ", "Đồng ý"],
     }).then((willDelete) => {
       if (willDelete) {
         // Gửi yêu cầu DELETE đến URL endpoint
         $.ajax({
-          url: "/Web_Assignment/admin/hotel/delete?id=" + hotelID,
+        	
+          url: "/Web_Assignment/admin/room/delete?id=" + roomID,
           success: function(response) {
             // Xử lý phản hồi từ máy chủ
             swal("Đã xóa thành công!", { icon: "success" })
               .then((value) => {
                 // Tải lại trang hoặc cập nhật dữ liệu khách sạn
-                window.location.href = "/Web_Assignment/admin/hotel";
+                window.location.href = "/Web_Assignment/admin/room";
               });
           },
           error: function(xhr, status, error) {
@@ -325,54 +321,94 @@
     }
   }
 
-  $(document).ready(function () {
-	    // Biến toàn cục để lưu trữ đường dẫn của hình ảnh đã chọn trước đó
-	    var selectedImageURL = "";
+  $(".edit").click(function () {
+	  	var roomID = $(this).closest("tr").find("td:eq(0)").text();
+	    var roomType = $(this).closest("tr").find("td:eq(2)").text(); // Lấy loại phòng từ cột thứ ba
+	    var price = $(this).closest("tr").find("td:eq(3)").text(); // Lấy giá từ cột thứ tư
+	    var statusHTML = $(this).closest("tr").find("td:eq(4)").html(); // Lấy HTML của cột thứ năm
+	    var status = statusHTML.includes("Còn trống") ? "available" : "booked"; // Kiểm tra xem phòng có trạng thái còn trống hay không
+	    var description = $(this).closest("tr").find("td:eq(5)").text(); // Lấy mô tả từ cột thứ sáu
 
-	    $(".edit").click(function () {
-	        // Lấy thông tin từ hàng tương ứng trong bảng
-	        var hotelID = $(this).closest("tr").find("td:eq(1)").text();
-	        var roomName = $(this).closest("tr").find("td:eq(2)").text();
-	        var hotelLocation = $(this).closest("tr").find("td:eq(4)").text();
-	        var hotelStars = $(this).closest("tr").find("td:eq(5)").text();
-	        var hotelImageURL = $(this).closest("tr").find("td:eq(3) img").attr("src");
-	        var hotelDescription = $(this).closest("tr").find("td:eq(6)").text();
-	        var saveButton = $("#saveButton"); // Lấy đối tượng của nút "Lưu lại"
+	    $("#roomId").val(roomID); // Đặt giá trị của input ẩn roomId
+	    $("#TypeRoom").val(roomType); // Đặt giá trị của input loại phòng
+	    $("#price").val(price); // Đặt giá trị của input giá
+	    $("#status").val(status); // Đặt giá trị của select trạng thái
+	    $("#description").val(description); // Đặt giá trị của textarea mô tả
+	});
+	
+	function submitForm() {
 
-	        // Đặt giá trị hotelID vào thuộc tính formaction của nút "Lưu lại"
-	        saveButton.attr("formaction", "/Web_Assignment/admin/hotel/edit?id=" + hotelID);
+	    var formData = {
+	      roomId: $("#roomId").val(),
+	      roomType: $("#TypeRoom").val(),
+	      price: $("#price").val(),
+	      status: $("#status").val(),
+	      description: $("#description").val(),
+	    };
 
-	        // Đặt giá trị vào các input của modal
-	        $("#hotelID").val(hotelID);
-	        $("#roomName").val(roomName);
-	        $("#hotelLocation").val(hotelLocation);
-	        $("#hotelStars").val(hotelStars); // Đặt giá trị cho hotelStarsEdit
-	        $("#hotelImage").attr("src", selectedImageURL || hotelImageURL); // Sử dụng selectedImageURL nếu có, nếu không sử dụng hotelImageURL
-	        $("#hotelDescription").val(hotelDescription);
-	        
-	        // Mở modal
-	        $("#ModalUP").modal("show");
-	    });
-
-	    $("#choicefle").change(function(){
-	        readURL(this);
-	    });
-
-	    // Hiển thị hình ảnh đã chọn và cập nhật selectedImageURL
-	    function readURL(input) {
-	        if (input.files && input.files[0]) {
-	            var reader = new FileReader();
-	            reader.onload = function (e) {
-	                $('#hotelImage').attr('src', e.target.result);
-	                selectedImageURL = e.target.result; // Cập nhật selectedImageURL với đường dẫn mới
-	            }
-	            reader.readAsDataURL(input.files[0]);
+	    // Gửi yêu cầu POST đến URL endpoint
+	    $.ajax({
+	        type: "POST", // Sử dụng phương thức POST
+	        url: "/Web_Assignment/admin/room/edit", // URL để gửi yêu cầu
+	        data: formData, // Dữ liệu để gửi cùng yêu cầu (các thông tin của phòng)
+	        success: function(response) {
+	            // Xử lý phản hồi từ máy chủ khi yêu cầu thành công
+	            swal("Cập nhật thành công", { icon: "success" }).then((value) => {
+	                window.location.href = "/Web_Assignment/admin/room"; // Chuyển hướng đến trang danh sách phòng
+	            });
+	        },
+	        error: function(xhr, status, error) {
+	            // Xử lý lỗi khi yêu cầu thất bại
+	            swal("cập nhật thất bại", { icon: "error" }).then((value) => {
+	                window.location.href = "/Web_Assignment/admin/room"; // Chuyển hướng đến trang danh sách phòng
+	            });
 	        }
-	    }
+	    });
+	  }
+	
+	
+	// lọc phòng
+	$(document).ready(function() {
+	    
+	    $('#secltHotel').change(function() {
+	        var selectedHotel = $(this).val();
+	        $('#sampleTable tbody tr').each(function() {
+	           
+	            var hotelName = $(this).find('td:eq(1)').text();
+	   
+	            if (selectedHotel === 'all' || selectedHotel === hotelName) {
+	                
+	                $(this).show();
+	            } else {
+
+	                $(this).hide();
+	            }
+	        });
+	    });
+
+	    
+	    $('#roomType').change(function() {
+	   
+	        var selectedRoomType = $(this).val();
+
+	
+	        $('#sampleTable tbody tr').each(function() {
+	           
+	            var roomType = $(this).find('td:eq(2)').text();
+
+	            
+	            if (selectedRoomType === 'all' || selectedRoomType === roomType) {
+	                
+	                $(this).show();
+	            } else {
+	               
+	                $(this).hide();
+	            }
+	        });
+	    });
 	});
 
 </script>
-
 </body>
 
 </html>

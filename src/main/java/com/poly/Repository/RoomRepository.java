@@ -92,8 +92,10 @@ public class RoomRepository implements IRoomRepository {
     }
 
     
-	public HotelRooms findHotelById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public HotelRooms findRoomById(int id) {
+
+		return em.createQuery("SELECT a FROM HotelRooms a WHERE a.roomID = :id", HotelRooms.class)
+		         .setParameter("id", id)
+		         .getSingleResult();
 	}
 }

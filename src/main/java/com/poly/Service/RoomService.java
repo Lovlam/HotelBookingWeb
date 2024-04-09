@@ -21,7 +21,10 @@ private HotelRepository hotelRepository = new HotelRepository();
 	
 	public HotelRooms addRoom(String hotelName, HotelRooms room) {
 		Hotels finHotel = hotelRepository.findHotelByName(hotelName);
+		System.out.println(finHotel);
 		if(finHotel != null ) {
+			
+			room.setHotelID(finHotel);
 			roomRepository.addRoom(room);
 			return room;
 		}
@@ -30,25 +33,22 @@ private HotelRepository hotelRepository = new HotelRepository();
 	}
 	
 	
-//	public HotelRooms deleteRoom(int id) {
-//		HotelRooms findRoom = roomRepository.findHotelById(id);
-//		if(finHotel != null) {
-//			roomRepository.deleteHotel(id);
-//			return finHotel;
-//		}
-//		return null;
-//	}
+	public HotelRooms deleteRoom(int id) {
+		HotelRooms findRoom = roomRepository.findRoomById(id);
+		if(findRoom != null) {
+			roomRepository.deleteRoom(id);
+			return findRoom;
+		}
+		return null;
+	}
 //
-//	public HotelRooms editRoom(HotelRooms oldHotel,int hotelId) {
-//		HotelRooms finHotel = roomRepository.findHotelById(hotelId);
-//		if(finHotel != null) {
-//			oldHotel.setHotelID(finHotel.getHotelID());
-//			if(oldHotel.getImageURL() == null) {
-//				oldHotel.setImageURL(finHotel.getImageURL());
-//			}
-//			roomRepository.updateHotel(oldHotel);
-//			return oldHotel;
-//		}
-//		return null;
-//	}
+	public HotelRooms editRoom(HotelRooms oldRoom,int roomID) {
+		HotelRooms finHotel = roomRepository.findRoomById(roomID);
+		if(finHotel != null) {
+			oldRoom.setHotelID(finHotel.getHotelID());
+			roomRepository.updateRoom(oldRoom);
+			return oldRoom;
+		}
+		return null;
+	}
 }

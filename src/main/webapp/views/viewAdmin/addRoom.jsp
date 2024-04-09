@@ -213,174 +213,57 @@
 
               <div class="form-group  col-md-3">
                 <label class="control-label">Giá</label>
-                <input class="form-control" type="number" name="roomPrice">
+                <input class="form-control" type="number" id="roomPrice" required">
               </div>
 				
 			  <div class="form-group  col-md-3">
                 <label class="control-label">Loại Phòng</label>
-                <input class="form-control" type="text" name="roomType">
+                <input class="form-control" type="text" id="roomType" required">
               </div>
 
               <div class="form-group col-md-12">
                 <label class="control-label">Mô tả phòng</label>
-                <textarea class="form-control" name="mota" id="mota"></textarea>
-                <script>CKEDITOR.replace('mota');</script>
+                <textarea class="form-control" name="mota" id="roomDes" required"></textarea>
+
               </div>
 
           </div>
-          <button class="btn btn-save" type="button">Lưu lại</button>
+          <button class="btn btn-save" type="button" onclick="addRoom()">Lưu lại</button>
           <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
         </div>
   </main>
 
 
-  <!--
-  MODAL CHỨC VỤ 
--->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-
-        <div class="modal-body">
-          <div class="row">
-            <div class="form-group  col-md-12">
-              <span class="thong-tin-thanh-toan">
-                <h5>Thêm mới nhà cung cấp</h5>
-              </span>
-            </div>
-            <div class="form-group col-md-12">
-              <label class="control-label">Nhập tên chức vụ mới</label>
-              <input class="form-control" type="text" required>
-            </div>
-          </div>
-          <BR>
-          <button class="btn btn-save" type="button">Lưu lại</button>
-          <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-          <BR>
-        </div>
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--
-MODAL
--->
-
-
-
-  <!--
-  MODAL DANH MỤC
--->
-  <!-- <div class="modal fade" id="adddanhmuc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-
-        <div class="modal-body">
-          <div class="row">
-            <div class="form-group  col-md-12">
-              <span class="thong-tin-thanh-toan">
-                <h5>Thêm mới danh mục </h5>
-              </span>
-            </div>
-            <div class="form-group col-md-12">
-              <label class="control-label">Nhập tên danh mục mới</label>
-              <input class="form-control" type="text" required>
-            </div>
-            <div class="form-group col-md-12">
-              <label class="control-label">Danh mục sản phẩm hiện đang có</label>
-              <ul style="padding-left: 20px;">
-                <li>Bàn ăn</li>
-              <li>Bàn thông minh</li>
-              <li>Tủ</li>
-              <li>Ghế gỗ</li>
-              <li>Ghế sắt</li>
-              <li>Giường người lớn</li>
-              <li>Giường trẻ em</li>
-              <li>Bàn trang điểm</li>
-              <li>Giá đỡ</li>
-              </ul>
-            </div> -->
-          </div>
-          <BR>
-          <button class="btn btn-save" type="button">Lưu lại</button>
-          <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-          <BR>
-        </div>
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--
-MODAL
--->
-
-
-
-
-  <!--
-  MODAL TÌNH TRẠNG
--->
-  <div class="modal fade" id="addtinhtrang" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-
-        <div class="modal-body">
-          <div class="row">
-            <div class="form-group  col-md-12">
-              <span class="thong-tin-thanh-toan">
-                <h5>Thêm mới tình trạng</h5>
-              </span>
-            </div>
-            <div class="form-group col-md-12">
-              <label class="control-label">Nhập tình trạng mới</label>
-              <input class="form-control" type="text" required>
-            </div>
-          </div>
-          <BR>
-          <button class="btn btn-save" type="button">Lưu lại</button>
-          <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-          <BR>
-        </div>
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--
-MODAL
--->
-
-
-
-  <script src="js/jquery-3.2.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/plugins/pace.min.js"></script>
   <script>
-    const inpFile = document.getElementById("inpFile");
-    const loadFile = document.getElementById("loadFile");
-    // const previewContainer = document.getElementById("imagePreview");
-    // const previewContainer = document.getElementById("imagePreview");
-    const previewImage = previewContainer.querySelector(".image-preview__image");
-    const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
-    inpFile.addEventListener("change", function () {
-      const file = this.files[0];
-      if (file) {
-        const reader = new FileReader();
-        previewDefaultText.style.display = "none";
-        previewImage.style.display = "block";
-        reader.addEventListener("load", function () {
-          previewImage.setAttribute("src", this.result);
-        });
-        reader.readAsDataURL(file);
-      }
-    });
+  function addRoom() {
+	// Lấy thông tin về phòng từ các trường nhập liệu hoặc các nguồn khác
+	    var roomInfo = {
+	        hotelName: $("#secltHotel").val(),
+	        roomType: $("#roomType").val(),
+	        roomPrice: $('#roomPrice').val(),
+	        roomDes: $('#roomDes').val(),
+	        // Thêm các thông tin khác nếu cần
+	    };
+
+	    $.ajax({
+	        type: "POST", // Sử dụng phương thức POST
+	        url: "/Web_Assignment/admin/room/add", // URL để gửi yêu cầu
+	        data: roomInfo, // Dữ liệu để gửi cùng yêu cầu (các thông tin của phòng)
+	        success: function(response) {
+	            // Xử lý phản hồi từ máy chủ khi yêu cầu thành công
+	            swal("Đã thêm thành công", { icon: "success" }).then((value) => {
+	                window.location.href = "/Web_Assignment/admin/room"; // Chuyển hướng đến trang danh sách phòng
+	            });
+	        },
+	        error: function(xhr, status, error) {
+	            // Xử lý lỗi khi yêu cầu thất bại
+	            swal("Không thể thêm phòng", { icon: "error" }).then((value) => {
+	                window.location.href = "/Web_Assignment/admin/room"; // Chuyển hướng đến trang danh sách phòng
+	            });
+	        }
+	    });
+	  }
+  
 
   </script>
 </body>

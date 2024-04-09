@@ -38,10 +38,36 @@ public class HotelRooms {
     @Column(name = "isBooKing")
     private boolean isBooking;
 
+    @Column(name = "Description")
+    private String description;
+    
     // Constructors, getters, and setters
     public HotelRooms() {}
 
-    // Getters and setters
+    
+    
+    public HotelRooms(String roomType, Double price, String description) {
+		super();
+		this.roomType = roomType;
+		this.price = price;
+		this.description = description;
+		this.isBooking = false;
+		this.isDelete = false;
+	}
+    
+    public HotelRooms(int roomID, String roomType, Double price, String description, boolean isBooking) {
+		super();
+		this.roomID = roomID;
+		this.roomType = roomType;
+		this.price = price;
+		this.description = description;
+		this.isBooking = isBooking;
+		this.isDelete = false;
+	}
+
+
+
+	// Getters and setters
     public int getRoomID() {
         return roomID;
     }
@@ -97,4 +123,39 @@ public class HotelRooms {
     public void setBooking(boolean booking) {
         isBooking = booking;
     }
+
+	public Hotels getHotelID() {
+		return hotelID;
+	}
+
+	public void setHotelID(Hotels hotelID) {
+		this.hotelID = hotelID;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+    
+	public String getHotelName() {
+        if (hotelID != null) {
+            return hotelID.getName(); 
+        } else {
+            return ""; 
+        }
+    }
+
+
+
+	@Override
+	public String toString() {
+		return "HotelRooms [roomID=" + roomID + ", hotelID=" + hotelID + ", roomType=" + roomType + ", price=" + price
+				+ ", imgID=" + imgID + ", isDelete=" + isDelete + ", isBooking=" + isBooking + ", description="
+				+ description + "]";
+	}
+	
+	
 }
