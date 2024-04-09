@@ -103,5 +103,17 @@ public class AccountRepository implements IAcountRepository{
 		}
 			 
 	}
+	@Override
+	public Account findByPhoneNumber(String phone) {
+		List<Account> result = em.createQuery("SELECT a FROM Account a WHERE a.phone = :phone" , Account.class)
+				.setParameter("phone", phone)
+				.getResultList();
+		
+	    if (result.size() == 1) {
+	        return result.get(0);
+	    } else {
+	        return null;
+	    }
+	}
 
 }

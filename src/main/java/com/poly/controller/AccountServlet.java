@@ -11,7 +11,7 @@ import java.util.List;
 import com.poly.Entity.Account;
 import com.poly.Service.AccountService;
 
-@WebServlet({"/register","/login"})
+@WebServlet({"/register","/login" , "/fpass"})
 public class AccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AccountService accountService = new AccountService();
@@ -37,6 +37,13 @@ public class AccountServlet extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+    	}else if(uri.contains("fpass")){
+    		try {
+				forgot(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     	}
     }
     
@@ -45,9 +52,11 @@ public class AccountServlet extends HttpServlet {
     	String uri = request.getRequestURI();
     	
     	if(uri.contains("register")) {
-    		request.getRequestDispatcher("views/UserView/registerForm.jsp").forward(request, response);
+    		request.getRequestDispatcher("views/SignUp/SignUp.jsp").forward(request, response);
     	}else if(uri.contains("login")) {
     		request.getRequestDispatcher("views/ViewLogin/index.jsp").forward(request, response);
+    	}else if(uri.contains("fpass")) {
+    		request.getRequestDispatcher("views/FG/Forgot.jsp").forward(request, response);
     	}
     	
     }
@@ -61,13 +70,15 @@ public class AccountServlet extends HttpServlet {
     	account.setAddress(request.getParameter("Address"));
     	account.setManager(false);
     	account.setDelete(false);
-    	System.out.println(request.getParameter("Name"));
+
     	Account checklogin = accountService.register(account);
+    	
     	if(checklogin == null) {
     		request.setAttribute("message", "email da ton tai");
-    		request.getRequestDispatcher("views/UserView/registerForm.jsp").forward(request, response);
+    		request.getRequestDispatcher("views/SignUp/SignUp.jsp").forward(request, response);
     	}else {
-    		request.getRequestDispatcher("views/ViewLogin/index.html").forward(request, response);
+
+    		request.getRequestDispatcher("views/ViewLogin/index.jsp").forward(request, response);
     	}
     	
     }
@@ -87,6 +98,19 @@ public class AccountServlet extends HttpServlet {
     			request.setAttribute("erro", "Đăng nhập thành công với user"); 
     			request.getRequestDispatcher("views/ViewLogin/index.jsp").forward(request, response);
     		}
+    	}
+    }
+    
+    public void forgot(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    	String phoneStr = request.getParameter("phone"); 
+    	Account account = accountService.Forgot(phoneStr) ; 
+    	System.out.println(phoneStr);
+    	if(account != null && account.getPhone().equals(phoneStr)) {
+    		request.setAttribute("message", "đúng");
+    		request.getRequestDispatcher("views/FG/Forgot.jsp").forward(request, response);
+    	}else {
+    		request.setAttribute("message", "sai");
+    		request.getRequestDispatcher("views/FG/Forgot.jsp").forward(request, response);
     	}
     }
 

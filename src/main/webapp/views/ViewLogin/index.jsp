@@ -59,7 +59,7 @@
 			</label>
 		</div>
 	<div>
-				<a href="#" class="txt1">
+				<a href="/Web_Assignment/fpass" class="txt1">
 					Forgot Password?
 				</a>
 			</div>

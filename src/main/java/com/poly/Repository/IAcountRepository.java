@@ -12,5 +12,6 @@ public interface IAcountRepository {
     void updateAccount(Account account);
     void deleteAccount(int accountId);
     List<Account> findAllAccounts();
+	Account findByPhoneNumber(String number);
 
 }
