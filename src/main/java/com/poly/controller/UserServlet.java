@@ -24,7 +24,7 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
 		if(uri.contains("/index")) {
-			request.getRequestDispatcher("/views/UserView/index.html").forward(request, response);
+			request.getRequestDispatcher("/views/UserView/index.jsp").forward(request, response);
 		}else if(uri.contains("/about")) {
 			request.getRequestDispatcher("/views/UserView/about.html").forward(request, response);
 		}else if(uri.contains("/tour")) {
@@ -36,11 +36,9 @@ public class UserServlet extends HttpServlet {
 		}else if(uri.contains("/contact")) {
 			request.getRequestDispatcher("/views/UserView/contact.html").forward(request, response);
 		}else {
-			request.getRequestDispatcher("/views/UserView/index.html").forward(request, response);
+			request.getRequestDispatcher("/views/UserView/index.jsp").forward(request, response);
 		}
-		
-		
-		
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
