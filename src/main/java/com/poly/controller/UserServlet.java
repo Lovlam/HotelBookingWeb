@@ -7,6 +7,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+
+import com.poly.Entity.HotelRooms;
+import com.poly.Entity.Hotels;
+import com.poly.Service.HotelService;
+import com.poly.Service.RoomService;
 @WebServlet("/user/*")
 @MultipartConfig(
 	    fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
@@ -16,7 +22,8 @@ import java.io.IOException;
 
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private static HotelService hotelService = new HotelService();
+	private static RoomService roomService = new RoomService();
     public UserServlet() {
         super();
     }
@@ -28,21 +35,48 @@ public class UserServlet extends HttpServlet {
 		}else if(uri.contains("/about")) {
 			request.getRequestDispatcher("/views/UserView/about.jsp").forward(request, response);
 		}else if(uri.contains("/tour")) {
-			request.getRequestDispatcher("/views/UserView/tour.html").forward(request, response);
+			request.getRequestDispatcher("/views/UserView/tour.jsp").forward(request, response);
 		}else if(uri.contains("/hotels")) {
-			request.getRequestDispatcher("/views/UserView/hotel.html").forward(request, response);
+			request.getRequestDispatcher("/views/UserView/hotel.jsp").forward(request, response);
 		}else if(uri.contains("/blog")) {
-			request.getRequestDispatcher("/views/UserView/blog.html").forward(request, response);
+			request.getRequestDispatcher("/views/UserView/blog.jsp").forward(request, response);
 		}else if(uri.contains("/contact")) {
-			request.getRequestDispatcher("/views/UserView/contact.html").forward(request, response);
-		}else {
+			request.getRequestDispatcher("/views/UserView/contact.jsp").forward(request, response);
+		}else if(uri.contains("/hotel")) {
+			showDetailHotel(request, response);
+		}
+		else {
 			request.getRequestDispatcher("/views/UserView/index.jsp").forward(request, response);
 		}
 	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/UserView/index.html").forward(request, response);
+		request.getRequestDispatcher("/views/UserView/index.jsp").forward(request, response);
 	}
+	
+	private List<Hotels> showAllHotel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Hotels> hotels = hotelService.showAll();
+		return hotels;
+	}
+	
+	private List<HotelRooms> showAllRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<HotelRooms> rooms = roomService.showAll();
+		return rooms;
+	}
+	
+	private void showDetailHotel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		int hotelID = Integer.parseInt(request.getParameter("id"));
+		Hotels hotel = hotelService.getHotelById(hotelID);
+		if(hotel != null) {
+			request.setAttribute("hotel", hotel);
+			request.setAttribute("listRoom", roomService.showRoomsOfHotel(hotel.getHotelID()));
+			request.getRequestDispatcher("/views/UserView/hotel-single.jsp").forward(request, response);
+		}else {
+			request.getRequestDispatcher("/user/hotels").forward(request, response);
+		}
+	}
+	
+	
 
 }

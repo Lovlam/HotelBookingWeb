@@ -12,4 +12,5 @@ public interface IRoomRepository {
 	List<HotelRooms> findAllRoom();
 	List<HotelRooms> findRoomByPrice(Double price);
 	List<HotelRooms> findRoomBooking();
+	List<HotelRooms> findRoomByHotelID(int hotelID);
 }
