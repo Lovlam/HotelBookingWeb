@@ -91,12 +91,13 @@ public class AccountServlet extends HttpServlet {
     		request.setAttribute("erro", "Đăng nhập thất bại");
     		request.getRequestDispatcher("views/ViewLogin/index.jsp").forward(request, response);
     	} else {
+    		request.getSession().setAttribute("isloginUs", account);
     		if(account.isManager() == true) {
     			request.setAttribute("erro", "Đăng nhập thành công với admin"); 
-    			request.getRequestDispatcher("views/ViewLogin/index.jsp").forward(request, response);
+    			request.getRequestDispatcher("/admin/hotel").forward(request, response);
     		}else if(account.isManager() == false){
     			request.setAttribute("erro", "Đăng nhập thành công với user"); 
-    			request.getRequestDispatcher("views/ViewLogin/index.jsp").forward(request, response);
+    			request.getRequestDispatcher("/user/index").forward(request, response);
     		}
     	}
     }

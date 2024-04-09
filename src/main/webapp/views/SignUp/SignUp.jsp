@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-
-<!doctype html>
 <html lang="en">
 
 <!-- Mirrored from preview.colorlib.com/theme/bootstrap/signup-form-19/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Apr 2024 17:29:42 GMT -->
