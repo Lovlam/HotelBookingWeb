@@ -69,4 +69,13 @@
     <servlet-name>UserServlet</servlet-name>
     <url-pattern>/UserServlet</url-pattern>
   </servlet-mapping>
+  <filter>
+    <display-name>I18NFilter</display-name>
+    <filter-name>I18NFilter</filter-name>
+    <filter-class>com.poly.controller.I18NFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>I18NFilter</filter-name>
+    <url-pattern>/I18NFilter</url-pattern>
+  </filter-mapping>
 </web-app>

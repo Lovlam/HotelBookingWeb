@@ -29,5 +29,14 @@ public class AccountService {
         return account;
 	}
 	
+	public Account Forgot(String phone) throws Exception{
+		Account account = accountRepository.findByPhoneNumber(phone);
+		System.out.println(accountRepository.findByPhoneNumber(phone));
+		if(account == null) {
+			return null ;
+		}
+		return account ; 
+	}
+	
 	
 }

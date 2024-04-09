@@ -1,9 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <!-- Mirrored from preview.colorlib.com/theme/direngine/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Apr 2024 17:40:36 GMT -->
 
 <head>
+<meta charset="UTF-8">
   <title>DirEngine - Free Bootstrap 4 Template by Colorlib</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,6 +26,7 @@
   <link rel="stylesheet" href="/Web_Assignment/views/UserView/css/flaticon.css">
   <link rel="stylesheet" href="/Web_Assignment/views/UserView/css/icomoon.css">
   <link rel="stylesheet" href="/Web_Assignment/views/UserView/css/style.css">
+  
   <script
     nonce="cf2bac32-ca05-4aa4-a1d6-6d6ac7c3dbe1">try { (function (w, d) { !function (b, c, d, e) { b[d] = b[d] || {}; b[d].executed = []; b.zaraz = { deferred: [], listeners: [] }; b.zaraz.q = []; b.zaraz._f = function (f) { return async function () { var g = Array.prototype.slice.call(arguments); b.zaraz.q.push({ m: f, a: g }) } }; for (const h of ["track", "set", "debug"]) b.zaraz[h] = b.zaraz._f(h); b.zaraz.init = () => { var i = c.getElementsByTagName(e)[0], j = c.createElement(e), k = c.getElementsByTagName("title")[0]; k && (b[d].t = c.getElementsByTagName("title")[0].text); b[d].x = Math.random(); b[d].w = b.screen.width; b[d].h = b.screen.height; b[d].j = b.innerHeight; b[d].e = b.innerWidth; b[d].l = b.location.href; b[d].r = c.referrer; b[d].k = b.screen.colorDepth; b[d].n = c.characterSet; b[d].o = (new Date).getTimezoneOffset(); if (b.dataLayer) for (const o of Object.entries(Object.entries(dataLayer).reduce(((p, q) => ({ ...p[1], ...q[1] })), {}))) zaraz.set(o[0], o[1], { scope: "page" }); b[d].q = []; for (; b.zaraz.q.length;) { const r = b.zaraz.q.shift(); b[d].q.push(r) } j.defer = !0; for (const s of [localStorage, sessionStorage]) Object.keys(s || {}).filter((u => u.startsWith("_zaraz_"))).forEach((t => { try { b[d]["z_" + t.slice(7)] = JSON.parse(s.getItem(t)) } catch { b[d]["z_" + t.slice(7)] = s.getItem(t) } })); j.referrerPolicy = "origin"; j.src = "../../cdn-cgi/zaraz/sd0d9.js?z=" + btoa(encodeURIComponent(JSON.stringify(b[d]))); i.parentNode.insertBefore(j, i) };["complete", "interactive"].includes(c.readyState) ? zaraz.init() : b.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, "zarazData", "script"); })(window, document) } catch (e) { throw fetch("/cdn-cgi/zaraz/t"), e; };</script>
 </head>
@@ -34,16 +40,30 @@
         <span class="oi oi-menu"></span> Menu
       </button>
       <div class="collapse navbar-collapse" id="ftco-nav">
+      	<fmt:setLocale value="${sessionScope.lang}" scope="request"/>
+		<fmt:setBundle basename="global" scope="request" />
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active"><a href="/Web_Assignment/user/index" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="/Web_Assignment/user/about" class="nav-link">About</a></li>
-          <li class="nav-item"><a href="/Web_Assignment/user/tour" class="nav-link">Tour</a></li>
-          <li class="nav-item"><a href="/Web_Assignment/user/hotels" class="nav-link">Hotels</a></li>
-          <li class="nav-item"><a href="/Web_Assignment/user/blog" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="/Web_Assignment/user/contact" class="nav-link">Contact</a></li>
-          <li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Add listing</span></a></li>
+          <li class="nav-item active"><a href="/Web_Assignment/user/index" class="nav-link"><fmt:message key="menu.home"/></a></li>
+          <li class="nav-item"><a href="/Web_Assignment/user/about" class="nav-link"><fmt:message key="menu.about"/></a></li>
+          <li class="nav-item"><a href="/Web_Assignment/user/tour" class="nav-link"><fmt:message key="menu.tour"/></a></li>
+          <li class="nav-item"><a href="/Web_Assignment/user/hotels" class="nav-link"><fmt:message key="menu.hotels"/></a></li>
+          <li class="nav-item"><a href="/Web_Assignment/user/blog" class="nav-link"><fmt:message key="menu.blog"/></a></li>
+          <li class="nav-item"><a href="/Web_Assignment/user/contact" class="nav-link"><fmt:message key="menu.contact"/></a></li>
+          <li class="nav-item cta"><a href="contact.html" class="nav-link"><fmt:message key="menu.login"/></a></li>
         </ul>
+		<div class="dropdown">
+		  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+		   <fmt:message key="menu.language"/>
+		  </button>
+		  <ul class="dropdown-menu dropdown-menu-dark">
+		    <li><a class="dropdown-item" href="?lang=en">English</a></li>
+		    <li><a class="dropdown-item" href="?lang=vi">Tiếng Việt</a></li>
+		    <li><a class="dropdown-item"  href="?lang=zh">汉语</a></li>
+		  </ul>
+		</div>
+       
       </div>
+      </ul>
     </div>
   </nav>
 
@@ -53,40 +73,46 @@
       <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
         data-scrollax-parent="true">
         <div class="col-md-9 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-          <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Explore <br></strong>
-            your amazing city</h1>
-          <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find great places to stay, eat, shop, or
-            visit from local experts</p>
+          <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong><fmt:message key="menu.strong"/> <br></strong>
+            <fmt:message key="menu.h1"/></h1>
+          <p data-scrollax="properties: { translateY: '	30%', opacity: 1.6 }"><fmt:message key="menu.p1"/></p>
           <div class="block-17 my-4">
             <form action method="post" class="d-block d-flex">
               <div class="fields d-block d-flex">
                 <div class="textfield-search one-third">
-                  <input type="text" class="form-control" placeholder="Ex: food, service, hotel">
+                  <input type="text" class="form-control" placeholder="<fmt:message key="menu.ex"/>">
                 </div>
                 <div class="select-wrap one-third">
-                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                  <div class="icon">
+                  	<img alt="arrow-down" src="https://cdn-icons-png.flaticon.com/128/2985/2985150.png"
+                  	width="15" height="15">
+                  </div>
                   <select name id class="form-control" placeholder="Keyword search">
-                    <option value>Where</option>
-                    <option value>San Francisco USA</option>
-                    <option value>Berlin Germany</option>
-                    <option value>Lodon United Kingdom</option>
-                    <option value>Paris Italy</option>
+                    <option value><fmt:message key="menu.where"/></option>
+                    <option value><fmt:message key="menu.SanFranciscoUSA"/></option>
+                    <option value><fmt:message key="menu.BerlinGermany"/></option>
+                    <option value><fmt:message key="menu.LodonUnitedKingdom"/></option>
+                    <option value><fmt:message key="menu.ParisItaly"/></option>
                   </select>
                 </div>
               </div>
-              <input type="submit" class="search-submit btn btn-primary" value="Search">
+              <input type="submit" class="search-submit btn btn-primary" value="<fmt:message key="menu.search"/>">
             </form>
           </div>
-          <p>Or browse the highlights</p>
+          <p><fmt:message key="menu.p2"/></p>
           <p class="browse d-md-flex">
-            <span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i
-                  class="flaticon-fork"></i>Restaurant</a></span>
-            <span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i
-                  class="flaticon-hotel"></i>Hotel</a></span>
-            <span class="d-flex justify-content-md-center align-items-md-center"><a href="#"><i
-                  class="flaticon-meeting-point"></i>Places</a></span>
-            <span class="d-flex justify-content-md-center align-items-md-	center"><a href="#"><i
-                  class="flaticon-shopping-bag"></i>Shopping</a></span>
+            <span class="d-flex justify-content-md-center align-items-md-center"><a href="#">
+            <img alt="Fork" src="https://cdn-icons-png.flaticon.com/128/1046/1046857.png"
+            width="20" height="20"> <fmt:message key="menu.restaurant"/></a></span>
+            <span class="d-flex justify-content-md-center align-items-md-center"><a href="#">
+            <img alt="Hotel" src="https://cdn-icons-png.flaticon.com/128/201/201426.png"
+            width="20" height="20"> <fmt:message key="menu.hotel"/></a></span>
+            <span class="d-flex justify-content-md-center align-items-md-center"><a href="#">
+            <img alt="Places" src="https://cdn-icons-png.flaticon.com/512/9088/9088857.png "
+            width="20" height="20"> <fmt:message key="menu.places"/></a></span>
+            <span class="d-flex justify-content-md-center align-items-md-center"><a href="#">
+            <img alt="Shopping" src="https://cdn-icons-png.flaticon.com/128/743/743131.png"
+            width="20" height="20"> <fmt:message key="menu.shopping"/></a></span>
           </p>
         </div>
       </div>
@@ -101,8 +127,8 @@
               <div class="icon"><span class="flaticon-guarantee"></span></div>
             </div>
             <div class="media-body p-2 mt-2">
-              <h3 class="heading mb-3">Best Price Guarantee</h3>
-              <p>A small river named Duden flows by their place and supplies.</p>
+              <h3 class="heading mb-3"><fmt:message key="menu.BestPriceGuarantee"/></h3>
+              <p><fmt:message key="menu.p3"/></p>
             </div>
           </div>
         </div>
@@ -112,8 +138,8 @@
               <div class="icon"><span class="flaticon-like"></span></div>
             </div>
             <div class="media-body p-2 mt-2">
-              <h3 class="heading mb-3">Travellers Love Us</h3>
-              <p>A small river named Duden flows by their place and supplies.</p>
+              <h3 class="heading mb-3"><fmt:message key="menu.TravellersLoveUs"/></h3>
+              <p><fmt:message key="menu.p3"/></p>
             </div>
           </div>
         </div>
@@ -123,8 +149,8 @@
               <div class="icon"><span class="flaticon-detective"></span></div>
             </div>
             <div class="media-body p-2 mt-2">
-              <h3 class="heading mb-3">Best Travel Agent</h3>
-              <p>A small river named Duden flows by their place and supplies.</p>
+              <h3 class="heading mb-3"><fmt:message key="menu.BestTravelAgent"/></h3>
+              <p><fmt:message key="menu.p3"/></p>
             </div>
           </div>
         </div>
@@ -134,8 +160,8 @@
               <div class="icon"><span class="flaticon-support"></span></div>
             </div>
             <div class="media-body p-2 mt-2">
-              <h3 class="heading mb-3">Our Dedicated Support</h3>
-              <p>A small river named Duden flows by their place and supplies.</p>
+              <h3 class="heading mb-3"><fmt:message key="menu.OurDedicatedSupport"/></h3>
+              <p><fmt:message key="menu.p3"/></p>
             </div>
           </div>
         </div>
@@ -223,7 +249,7 @@
                 </div>
               </div>
             </div>
-            <div class="item">
+            <div class="item">	
               <div class="destination">
                 <a href="#" class="img d-flex justify-content-center align-items-center"
                   style="background-image: url(/Web_Assignment/views/UserView/images/destination-6.jpg);">
@@ -1059,7 +1085,32 @@
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317"
     integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA=="
     data-cf-beacon='{"rayId":"87140b1c4a956bc9","b":1,"version":"2024.3.0","token":"cd0b4b3a733644fc843ef0b185f98241"}'
-    crossorigin="anonymous"></script> 
+    crossorigin="anonymous"></script>
+   <!--  <script>
+ // Trích xuất giá trị "lang" từ URL
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const currentLang = urlParams.get('lang');
+
+    // Lắng nghe sự kiện khi thay đổi ngôn ngữ
+    const langSelect = document.getElementById("lang-select");
+    langSelect.addEventListener("change", (event) => {
+      const selectedLang = event.target.value;
+
+      // Cập nhật URL với tham số "lang" mới
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.set('lang', selectedLang);
+
+      // Chuyển hướng đến URL mới
+      window.location.href = newUrl.href;
+    });
+
+    // Thiết lập giá trị ngôn ngữ mặc định cho dropdown
+    if (currentLang) {
+      langSelect.value = currentLang;
+    }
+
+    </script>  -->
 </body>
 
 <!-- Mirrored from preview.colorlib.com/theme/direngine/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Apr 2024 17:41:01 GMT -->
