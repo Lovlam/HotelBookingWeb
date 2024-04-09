@@ -26,7 +26,7 @@ public class UserServlet extends HttpServlet {
 		if(uri.contains("/index")) {
 			request.getRequestDispatcher("/views/UserView/index.jsp").forward(request, response);
 		}else if(uri.contains("/about")) {
-			request.getRequestDispatcher("/views/UserView/about.html").forward(request, response);
+			request.getRequestDispatcher("/views/UserView/about.jsp").forward(request, response);
 		}else if(uri.contains("/tour")) {
 			request.getRequestDispatcher("/views/UserView/tour.html").forward(request, response);
 		}else if(uri.contains("/hotels")) {

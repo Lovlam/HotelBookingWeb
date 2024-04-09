@@ -1,5 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <!-- Mirrored from preview.colorlib.com/theme/direngine/about.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Apr 2024 17:41:10 GMT -->
 
@@ -34,14 +39,16 @@
         <span class="oi oi-menu"></span> Menu
       </button>
       <div class="collapse navbar-collapse" id="ftco-nav">
+      	<fmt:setLocale value="${sessionScope.lang}" scope="request"/>
+		<fmt:setBundle basename="global" scope="request" />
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a href="/Web_Assignment/user/index" class="nav-link">Home</a></li>
-          <li class="nav-item active"><a href="/Web_Assignment/user/about" class="nav-link">About</a></li>
-          <li class="nav-item"><a href="/Web_Assignment/user/tour" class="nav-link">Tour</a></li>
-          <li class="nav-item"><a href="/Web_Assignment/user/hotels" class="nav-link">Hotels</a></li>
-          <li class="nav-item"><a href="/Web_Assignment/user/blog" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="/Web_Assignment/user/contact" class="nav-link">Contact</a></li>
-          <li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Add listing</span></a></li>
+          <li class="nav-item"><a href="/Web_Assignment/user/index" class="nav-link"><fmt:message key="menu.home"/></a></li>
+          <li class="nav-item active"><a href="/Web_Assignment/user/about?lang=${sessionScope.lang}" class="nav-link"><fmt:message key="menu.about"/></a></li>
+          <li class="nav-item"><a href="/Web_Assignment/user/tour" class="nav-link"><fmt:message key="menu.tour"/></a></li>
+          <li class="nav-item"><a href="/Web_Assignment/user/hotels" class="nav-link"><fmt:message key="menu.hotels"/></a></li>
+          <li class="nav-item"><a href="/Web_Assignment/user/blog" class="nav-link"><fmt:message key="menu.blog"/></a></li>
+          <li class="nav-item"><a href="/Web_Assignment/user/contact" class="nav-link"><fmt:message key="menu.contact"/></a></li>
+          <li class="nav-item cta"><a href="contact.html" class="nav-link"><fmt:message key="menu.login"/></a></li>
         </ul>
       </div>
     </div>
@@ -54,7 +61,7 @@
         data-scrollax-parent="true">
         <div class="col-md-9 text-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
           <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a
-                href="index.html">Home</a></span> <span>About</span></p>
+                href="index.html"><fmt:message key="menu.home"/></a></span> <span><fmt:message key="menu.about"/></span></p>
           <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">About Us</h1>
         </div>
       </div>
