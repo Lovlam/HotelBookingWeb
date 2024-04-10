@@ -100,9 +100,15 @@ public class RoomRepository implements IRoomRepository {
 	}
 
 	@Override
-	public List<HotelRooms> findRoomByHotelID(int hotelID) {
+	public List<HotelRooms> findRoomByHotelID(Hotels hotelID) {
 		return em.createQuery("SELECT a FROM HotelRooms a WHERE a.hotelID = :hotelID ", HotelRooms.class)
 		         .setParameter("hotelID", hotelID)
 		         .getResultList();
+	}
+
+	@Override
+	public List<HotelRooms> findRoomByHotelID(int hotelID) {
+		
+		return null;
 	}
 }

@@ -8291,3 +8291,39 @@ textarea.form-control {
         border: 1px solid transparent;
         background: #1089ff;
         color: #fff; }
+/* Thêm vào cuối file style.css */
+.form-horizontal .form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px; /* Điều chỉnh khoảng cách giữa các trường */
+}
+
+.form-horizontal .form-group > label {
+  margin-bottom: 0;
+  flex: 1;
+  text-align: right;
+  padding-right: 20px; /* Khoảng cách giữa label và trường input */
+}
+
+.form-horizontal .form-group > input,
+.form-horizontal .form-group > .btn {
+  flex: 3;
+}
+
+.form-horizontal .form-group .icon {
+  position: absolute;
+  right: 25px;
+  z-index: 10;
+}
+
+/* Điều chỉnh cho nút Sign Up và link Sign In */
+.form-horizontal .submit-btn-group,
+.form-horizontal .signin-link {
+  justify-content: center;
+  display: flex;
+}
+
+.form-horizontal .signin-link {
+  margin-top: 15px;
+}
+        
