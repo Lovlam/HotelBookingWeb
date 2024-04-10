@@ -3,7 +3,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
-
+<style>
+	.otp-letter-input{
+            max-width: 10%;
+            height: 90px;
+            border: 1px solid #198754;
+            border-radius:10px;
+            color: #198754;
+            font-size: 60px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .btn{
+            height: 50px;
+        }
+</style>
 <!-- Mirrored from preview.colorlib.com/theme/bootstrap/signup-form-19/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Apr 2024 17:29:42 GMT -->
 <head>
 <title>Đăng ký</title>
@@ -73,9 +87,9 @@
 </div>
 </section>
 
-<!-- Modal OTP -->
+<!-- Điều chỉnh Modal OTP -->
 <div class="modal fade" id="otpModal" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="otpModalLabel">Xác Thực OTP</h5>
@@ -84,20 +98,22 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="otpForm">
-          <div class="form-group">
-            <label for="otpCode" class="col-form-label">Nhập mã OTP đã gửi đến email của bạn:</label>
-            <input type="text" class="form-control" id="otpCode">
-          </div>
-        </form>
+        <div class="text-center">Vui lòng nhập mã OTP được gửi tới email của bạn.</div>
+        <div class="d-flex justify-content-center mt-3">
+          <input type="text" class="otp-letter-input mx-1" maxlength="1">
+          <input type="text" class="otp-letter-input mx-1" maxlength="1">
+          <input type="text" class="otp-letter-input mx-1" maxlength="1">
+          <input type="text" class="otp-letter-input mx-1" maxlength="1">
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-        <button type="button" class="btn btn-primary" onclick="validateOTP()">Xác Nhận</button>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-primary">Xác Nhận</button>
       </div>
     </div>
   </div>
 </div>
+
 
 
 <script src="/Web_Assignment/views/SignUp/js/jquery.min.js"></script>
@@ -120,10 +136,7 @@
         }
     }
     
-    document.getElementById("SignUp").addEventListener("click", function(event){
-    	  event.preventDefault(); // Ngăn không cho form gửi đi ngay
-    	  $('#otpModal').modal('show'); // Hiển thị modal OTP
-    	});
+	
 
     
 </script>

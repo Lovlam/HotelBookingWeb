@@ -49,7 +49,12 @@ public class HotelService {
 	}
 	
 	public Hotels getHotelById(int id) {
-		return hotelRepository.findHotelById(id);
+		Hotels findHotel = hotelRepository.findHotelById(id);
+		if(findHotel != null) {
+			return findHotel;
+		}
+		
+		return null;
 	}
 
 	

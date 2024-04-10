@@ -145,7 +145,7 @@
 						<c:forEach var="hotel" items="${listHotel}">
 							<div class="col-md-4 ftco-animate">
 							<div class="destination">
-								<a href="Web_Assignment/user/hotel?id=${hotel.hotelID}"
+								<a href="/Web_Assignment/user/hotel?hotelID=${hotel.hotelID}"
 									class="img img-2 d-flex justify-content-center align-items-center"
 									style="background-image: url(/Web_Assignment/views/UserView/images/${hotel.imageURL});">
 									<div class="icon">

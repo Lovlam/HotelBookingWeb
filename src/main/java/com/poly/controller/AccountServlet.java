@@ -76,8 +76,8 @@ public class AccountServlet extends HttpServlet {
     	account.setAddress(request.getParameter("Address"));
     	account.setManager(false);
     	account.setDelete(false);
-    	Account checklogin = accountService.register(account);
     	
+    	Account checklogin = accountService.register(account);
     	if(checklogin == null ) {
     		request.setAttribute("message", "email da ton tai hoặc số điện thoại đã tồn tại");
     		request.getRequestDispatcher("views/SignUp/SignUp.jsp").forward(request, response);

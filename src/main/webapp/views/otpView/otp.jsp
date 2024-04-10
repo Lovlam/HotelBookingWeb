@@ -41,8 +41,8 @@
                 <div class="bg-white p-5 rounded-3 shadow-sm border">
                     <div>
                         <p class="text-center text-success" style="font-size: 5.5rem;"><i class="fa-solid fa-envelope-circle-check"></i></p>
-                        <p class="text-center text-center h5 ">Please check your email</p>
-                        <p class="text-muted text-center">We've sent a code to contact@curfcode.com</p>
+                        <p class="text-center text-center h5 ">Please check your Message</p>
+                        <p class="text-muted text-center">We've sent a code to </p>
                         <div class="row pt-4 pb-2">
                             <div class="col-3">
                                 <input class="otp-letter-input" type="text">

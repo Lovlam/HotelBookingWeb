@@ -149,6 +149,9 @@ public class HotelRooms {
     }
 
 
+	public int getImageID() {
+		return this.imgID.getImgID();
+	}
 
 	@Override
 	public String toString() {

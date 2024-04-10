@@ -44,7 +44,7 @@
 </div>
 </nav>
 
-<div class="hero-wrap js-fullheight" style="background-image: url('images/bg_5.jpg');">
+<div class="hero-wrap js-fullheight" style="background-image: url('/Web_Assignment/views/UserView/images/bg_5.jpg');">
 <div class="overlay"></div>
 <div class="container">
 <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
@@ -142,13 +142,13 @@
 <div class="col-md-12 ftco-animate">
 <div class="single-slider owl-carousel">
 <div class="item">
-<div class="hotel-img" style="background-image: url(images/hotel-2.jpg);"></div>
+<div class="hotel-img" style="background-image: url(/Web_Assignment/views/UserView/images/hotel-2.jpg);"></div>
 </div>
 <div class="item">
-<div class="hotel-img" style="background-image: url(images/hotel-3.jpg);"></div>
+<div class="hotel-img" style="background-image: url(/Web_Assignment/views/UserView/images/hotel-3.jpg);"></div>
 </div>
 <div class="item">
-<div class="hotel-img" style="background-image: url(images/hotel-4.jpg);"></div>
+<div class="hotel-img" style="background-image: url(/Web_Assignment/views/UserView/images/hotel-4.jpg);"></div>
 </div>
 </div>
 </div>
@@ -196,7 +196,7 @@
 <div class="row">
 <div class="col-md-4">
 <div class="destination">
-<a href="hotel-single.html" class="img img-2" style="background-image: url(images/room-4.jpg);"></a>
+<a href="hotel-single.html" class="img img-2" style="background-image: url(/Web_Assignment/views/UserView/images/room-4.jpg);"></a>
 <div class="text p-3">
 <div class="d-flex">
 <div class="one">
@@ -225,7 +225,7 @@
 </div>
 <div class="col-md-4">
 <div class="destination">
-<a href="hotel-single.html" class="img img-2" style="background-image: url(images/room-5.jpg);"></a>
+<a href="hotel-single.html" class="img img-2" style="background-image: url(/Web_Assignment/views/UserView/images/room-5.jpg);"></a>
 <div class="text p-3">
 <div class="d-flex">
 <div class="one">
@@ -254,7 +254,7 @@
 </div>
 <div class="col-md-4">
 <div class="destination">
-<a href="hotel-single.html" class="img img-2" style="background-image: url(images/room-6.jpg);"></a>
+<a href="hotel-single.html" class="img img-2" style="background-image: url(/Web_Assignment/views/UserView/images/room-6.jpg);"></a>
 <div class="text p-3">
 <div class="d-flex">
 <div class="one">
@@ -387,7 +387,7 @@
 <div class="row">
 <div class="col-md-4">
 <div class="destination">
-<a href="hotel-single.html" class="img img-2" style="background-image: url(images/hotel-1.jpg);"></a>
+<a href="hotel-single.html" class="img img-2" style="background-image: url(/Web_Assignment/views/UserView/images/hotel-1.jpg);"></a>
 <div class="text p-3">
 <div class="d-flex">
 <div class="one">
@@ -416,7 +416,7 @@
 </div>
 <div class="col-md-4">
 <div class="destination">
-<a href="hotel-single.html" class="img img-2" style="background-image: url(images/hotel-2.jpg);"></a>
+<a href="hotel-single.html" class="img img-2" style="background-image: url(/Web_Assignment/views/UserView/images/hotel-2.jpg);"></a>
 <div class="text p-3">
 <div class="d-flex">
 <div class="one">
@@ -445,7 +445,7 @@
 </div>
 <div class="col-md-4">
 <div class="destination">
-<a href="hotel-single.html" class="img img-2" style="background-image: url(images/hotel-3.jpg);"></a>
+<a href="hotel-single.html" class="img img-2" style="background-image: url(/Web_Assignment/views/UserView/images/hotel-3.jpg);"></a>
 <div class="text p-3">
 <div class="d-flex">
 <div class="one">
@@ -533,42 +533,31 @@
 </div>
 <div class="row">
 <div class="col-md-12 text-center">
-<p>
-Copyright &copy;<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com/" target="_blank">Colorlib</a>
-</p>
+
 </div>
 </div>
 </div>
 </footer>
 
-<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery-migrate-3.0.1.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/jquery.waypoints.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/aos.js"></script>
-<script src="js/jquery.animateNumber.min.js"></script>
-<script src="js/bootstrap-datepicker.js"></script>
-<script src="js/jquery.timepicker.min.html"></script>
-<script src="js/scrollax.min.js"></script>
+
+<script src="/Web_Assignment/views/UserView/js/jquery.min.js"></script>
+<script src="/Web_Assignment/views/UserView/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="/Web_Assignment/views/UserView/js/popper.min.js"></script>
+<script src="/Web_Assignment/views/UserView/js/bootstrap.min.js"></script>
+<script src="/Web_Assignment/views/UserView/js/jquery.easing.1.3.js"></script>
+<script src="/Web_Assignment/views/UserView/js/jquery.waypoints.min.js"></script>
+<script src="/Web_Assignment/views/UserView/js/jquery.stellar.min.js"></script>
+<script src="/Web_Assignment/views/UserView/js/owl.carousel.min.js"></script>
+<script src="/Web_Assignment/views/UserView/js/jquery.magnific-popup.min.js"></script>
+<script src="/Web_Assignment/views/UserView/js/aos.js"></script>
+<script src="/Web_Assignment/views/UserView/js/jquery.animateNumber.min.js"></script>
+<script src="/Web_Assignment/views/UserView/js/bootstrap-datepicker.js"></script>
+<script src="/Web_Assignment/views/UserView/js/jquery.timepicker.min.html"></script>
+<script src="/Web_Assignment/views/UserView/js/scrollax.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
-<script src="js/google-map.js"></script>
-<script src="js/main.js"></script>
+<script src="/Web_Assignment/views/UserView/js/main.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'UA-23581568-13');
-</script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317" integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA==" data-cf-beacon='{"rayId":"866723d81b999fc1","b":1,"version":"2024.2.4","token":"cd0b4b3a733644fc843ef0b185f98241"}' crossorigin="anonymous"></script>
 </body>
 
 <!-- Mirrored from preview.colorlib.com/theme/direngine/hotel-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 18 Mar 2024 18:03:36 GMT -->
