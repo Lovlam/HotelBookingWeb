@@ -72,6 +72,34 @@
 </div>
 </div>
 </section>
+
+<!-- Modal OTP -->
+<div class="modal fade" id="otpModal" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="otpModalLabel">Xác Thực OTP</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="otpForm">
+          <div class="form-group">
+            <label for="otpCode" class="col-form-label">Nhập mã OTP đã gửi đến email của bạn:</label>
+            <input type="text" class="form-control" id="otpCode">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="button" class="btn btn-primary" onclick="validateOTP()">Xác Nhận</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script src="/Web_Assignment/views/SignUp/js/jquery.min.js"></script>
 <script src="/Web_Assignment/views/SignUp/js/popper.js"></script>
 <script src="/Web_Assignment/views/SignUp/js/bootstrap.min.js"></script>
@@ -92,6 +120,13 @@
             return true;
         }
     }
+    
+    document.getElementById("SignUp").addEventListener("click", function(event){
+    	  event.preventDefault(); // Ngăn không cho form gửi đi ngay
+    	  $('#otpModal').modal('show'); // Hiển thị modal OTP
+    	});
+
+    
 </script>
 </body>
 

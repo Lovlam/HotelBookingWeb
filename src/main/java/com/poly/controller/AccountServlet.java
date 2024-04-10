@@ -60,6 +60,8 @@ public class AccountServlet extends HttpServlet {
     		request.getRequestDispatcher("views/ViewLogin/index.jsp").forward(request, response);
     	}else if(uri.contains("fpass")) {
     		request.getRequestDispatcher("views/FG/Forgot.jsp").forward(request, response);
+    	}else if(uri.contains("/otp")) {
+    		request.getRequestDispatcher("/views/otpView/otp.jsp").forward(request, response);
     	}
     	
     }
@@ -74,7 +76,6 @@ public class AccountServlet extends HttpServlet {
     	account.setAddress(request.getParameter("Address"));
     	account.setManager(false);
     	account.setDelete(false);
-
     	Account checklogin = accountService.register(account);
     	
     	if(checklogin == null) {
