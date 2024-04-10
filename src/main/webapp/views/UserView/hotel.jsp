@@ -25,8 +25,7 @@
 	<link rel="stylesheet" href="/Web_Assignment/views/UserView/css/flaticon.css">
 	<link rel="stylesheet" href="/Web_Assignment/views/UserView/css/icomoon.css">
 	<link rel="stylesheet" href="/Web_Assignment/views/UserView/css/style.css">
-	<script
-		nonce="d6e3c28e-2b15-47d2-8f3f-649e20864693">try {(function (w, d) {!function (o, p, q, r) {o[q] = o[q] || {}; o[q].executed = []; o.zaraz = {deferred: [], listeners: []}; o.zaraz.q = []; o.zaraz._f = function (s) {return async function () {var t = Array.prototype.slice.call(arguments); o.zaraz.q.push({m: s, a: t})}}; for (const u of ["track", "set", "debug"]) o.zaraz[u] = o.zaraz._f(u); o.zaraz.init = () => {var v = p.getElementsByTagName(r)[0], w = p.createElement(r), x = p.getElementsByTagName("title")[0]; x && (o[q].t = p.getElementsByTagName("title")[0].text); o[q].x = Math.random(); o[q].w = o.screen.width; o[q].h = o.screen.height; o[q].j = o.innerHeight; o[q].e = o.innerWidth; o[q].l = o.location.href; o[q].r = p.referrer; o[q].k = o.screen.colorDepth; o[q].n = p.characterSet; o[q].o = (new Date).getTimezoneOffset(); if (o.dataLayer) for (const B of Object.entries(Object.entries(dataLayer).reduce(((C, D) => ({...C[1], ...D[1]})), {}))) zaraz.set(B[0], B[1], {scope: "page"}); o[q].q = []; for (; o.zaraz.q.length;) {const E = o.zaraz.q.shift(); o[q].q.push(E)} w.defer = !0; for (const F of [localStorage, sessionStorage]) Object.keys(F || {}).filter((H => H.startsWith("_zaraz_"))).forEach((G => {try {o[q]["z_" + G.slice(7)] = JSON.parse(F.getItem(G))} catch {o[q]["z_" + G.slice(7)] = F.getItem(G)} })); w.referrerPolicy = "origin"; w.src = "../../cdn-cgi/zaraz/sd0d9.js?z=" + btoa(encodeURIComponent(JSON.stringify(o[q]))); v.parentNode.insertBefore(w, v)};["complete", "interactive"].includes(p.readyState) ? zaraz.init() : o.addEventListener("DOMContentLoaded", zaraz.init)}(w, d, "zarazData", "script");})(window, document)} catch (e) {throw fetch("/cdn-cgi/zaraz/t"), e;};</script>
+	
 </head>
 
 <body>
@@ -158,8 +157,10 @@
 					</div>
 				</div>
 				<div class="col-lg-9">
-					<div class="row">
-						<div class="col-md-4 ftco-animate">
+					<div class="row " id="hotelList">
+						
+						<c:forEach var="hotel" items="${listHotel}">
+							<div class="col-md-4 ftco-animate">
 							<div class="destination">
 								<a href="Web_Assignment/user/hotel?id=${hotel.hotelID}"
 									class="img img-2 d-flex justify-content-center align-items-center"
@@ -171,7 +172,7 @@
 								<div class="text p-3">
 									<div class="d-flex">
 										<div class="one">
-											<h3><a href=""Web_Assignment/user/hotel?id=${hotel.hotelID}">${hotel.hotelID }</a></h3>
+											<h3><a href=""Web_Assignment/user/hotel?id=${hotel.hotelID}">${hotel.name }</a></h3>
 											<p class="rate">
 												<i class="icon-star"></i>
 												<i class="icon-star"></i>
@@ -182,35 +183,38 @@
 											</p>
 										</div>
 										<div class="two">
-											<span class="price per-price">$40<br><small>/night</small></span>
+											
 										</div>
 									</div>
-									<p>Far far away, behind the word mountains, far from the countries</p>
+									<p>${hotel.description }</p>
 									<hr>
 									<p class="bottom-area d-flex">
-										<span><i class="icon-map-o"></i> Miami, Fl</span>
+										<span><i class="icon-map-o"></i>${hotel.location } </span>
 										<span class="ml-auto"><a href="#">Book Now</a></span>
 									</p>
 								</div>
 							</div>
 						</div>
-
+						</c:forEach>
 						
 					</div>
 					<div class="row mt-5">
-						<div class="col text-center">
-							<div class="block-27">
-								<ul>
-									<li><a href="#">&lt;</a></li>
-									<li class="active"><span>1</span></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">&gt;</a></li>
-								</ul>
-							</div>
-						</div>
+					    <div class="col text-center">
+					        <div class="block-27">
+					            <ul class="pagination justify-content-center">
+					                <li class="page-item">
+					                    <a class="page-link" href="#" id="prevPage"> < </a>
+					                   
+					                </li>
+					                <li class="page-item disabled">
+					                    <span class="page-link" id="currentPage">|</span>
+					                </li>
+					                <li class="page-item">
+					                    <a class="page-link" href="#" id="nextPage"> > </a>
+					                </li>
+					            </ul>
+					        </div>
+					    </div>
 					</div>
 				</div>
 			</div>
@@ -274,18 +278,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12 text-center">
-					<p>
-						Copyright &copy;
-						<script data-cfasync="false"
-							src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-						<script>document.write(new Date().getFullYear());</script> All rights reserved | This template
-						is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com/"
-							target="_blank">Colorlib</a>
-					</p>
-				</div>
-			</div>
+
 		</div>
 	</footer>
 
@@ -306,14 +299,14 @@
 	<script src="/Web_Assignment/views/UserView/js/aos.js"></script>
 	<script src="/Web_Assignment/views/UserView/js/jquery.animateNumber.min.js"></script>
 	<script src="/Web_Assignment/views/UserView/js/bootstrap-datepicker.js"></script>
-	<script src="/Web_Assignment/views/UserView/js/jquery.timepicker.min.html"></script>
+<!-- 	<script src="/Web_Assignment/views/UserView/js/jquery.timepicker.min.html"></script> -->
 	<script src="/Web_Assignment/views/UserView/js/scrollax.min.js"></script>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
-	<script src="/Web_Assignment/views/UserView/js/google-map.js"></script>
+	<!-- <script src="/Web_Assignment/views/UserView/js/google-map.js"></script> -->
 	<script src="/Web_Assignment/views/UserView/js/main.js"></script>
 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script> -->
 	<script>
 		window.dataLayer = window.dataLayer || [];
 		function gtag() {dataLayer.push(arguments);}
@@ -321,13 +314,75 @@
 
 		gtag('config', 'UA-23581568-13');
 	</script>
-	<script defer
-		src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317"
-		integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA=="
-		data-cf-beacon='{"rayId":"8667232b1a0a3f7d","b":1,"version":"2024.2.4","token":"cd0b4b3a733644fc843ef0b185f98241"}'
-		crossorigin="anonymous"></script>
+
+		<script>
+		// Định nghĩa hằng số
+		const hotelsPerPage = 9; // Số lượng khách sạn trên mỗi trang
+
+		// Lấy danh sách khách sạn
+		var hotels = document.querySelectorAll('.destination');
+		var totalHotels = hotels.length;
+		var totalPages = Math.ceil(totalHotels / hotelsPerPage);
+		var currentPage = 1;
+
+		// Hiển thị khách sạn theo trang
+		function showHotelsPerPage(pageNumber) {
+		    currentPage = pageNumber;
+		    var startIndex = (pageNumber - 1) * hotelsPerPage;
+		    var endIndex = startIndex + hotelsPerPage;
+		    
+		    hotels.forEach(function(hotel, index) {
+		        if (index >= startIndex && index < endIndex) {
+		            hotel.style.display = 'block';
+		        } else {
+		            hotel.style.display = 'none';
+		        }
+		    });
+		}
+
+		// Hiển thị trang đầu tiên khi trang web được tải
+		document.addEventListener('DOMContentLoaded', function() {
+		    showHotelsPerPage(1);
+		});
+
+		// Tạo các nút chuyển trang
+		var paginationContainer = document.querySelector('.pagination');
+
+		for (var i = 1; i <= totalPages; i++) {
+		    var pageLink = document.createElement('a');
+		    pageLink.href = '#';
+		    pageLink.textContent = i;
+		    
+		    pageLink.addEventListener('click', function(event) {
+		        event.preventDefault();
+		        var pageNumber = parseInt(this.textContent);
+		        showHotelsPerPage(pageNumber);
+		    });
+		    
+		    paginationContainer.appendChild(pageLink);
+		}
+
+		var prevLink = document.getElementById('prevPage');
+		prevLink.addEventListener('click', function(event) {
+		    event.preventDefault();
+		    if (currentPage > 1) {
+		        showHotelsPerPage(currentPage - 1);
+		    }
+		});
+
+		// Tạo nút Next
+		var nextLink = document.getElementById('nextPage');
+		nextLink.addEventListener('click', function(event) {
+		    event.preventDefault();
+		    if (currentPage < totalPages) {
+		        showHotelsPerPage(currentPage + 1);		
+		    }
+		});
+
+
+
+    	</script>
 </body>
 
-<!-- Mirrored from preview.colorlib.com/theme/direngine/hotel.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 18 Mar 2024 18:03:33 GMT -->
 
 </html>

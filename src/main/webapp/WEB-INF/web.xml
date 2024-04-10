@@ -87,4 +87,14 @@
     <filter-name>UserBlockFilter</filter-name>
     <url-pattern>/UserBlockFilter</url-pattern>
   </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VoiceOTPServlet</display-name>
+    <servlet-name>VoiceOTPServlet</servlet-name>
+    <servlet-class>com.poly.controller.VoiceOTPServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VoiceOTPServlet</servlet-name>
+    <url-pattern>/VoiceOTPServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import com.nimbusds.oauth2.sdk.Request;
 import com.poly.Entity.HotelRooms;
 import com.poly.Entity.Hotels;
 import com.poly.Service.HotelService;
@@ -37,6 +38,7 @@ public class UserServlet extends HttpServlet {
 		}else if(uri.contains("/tour")) {
 			request.getRequestDispatcher("/views/UserView/tour.jsp").forward(request, response);
 		}else if(uri.contains("/hotels")) {
+			showSelectHotel(showAllHotel(request, response), request, response);
 			request.getRequestDispatcher("/views/UserView/hotel.jsp").forward(request, response);
 		}else if(uri.contains("/blog")) {
 			request.getRequestDispatcher("/views/UserView/blog.jsp").forward(request, response);
@@ -77,6 +79,8 @@ public class UserServlet extends HttpServlet {
 		}
 	}
 	
-	
+	private void showSelectHotel(List<Hotels> hotels,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("listHotel", hotels);
+	}
 
 }
