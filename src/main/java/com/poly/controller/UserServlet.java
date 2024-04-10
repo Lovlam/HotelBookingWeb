@@ -69,6 +69,7 @@ public class UserServlet extends HttpServlet {
 	
 	private void showDetailHotel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		int hotelID = Integer.parseInt(request.getParameter("id"));
+		System.out.println(hotelID);
 		Hotels hotel = hotelService.getHotelById(hotelID);
 		if(hotel != null) {
 			request.setAttribute("hotel", hotel);
