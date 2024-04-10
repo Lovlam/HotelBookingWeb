@@ -1,7 +1,7 @@
 package Utils;
 
 import java.security.MessageDigest;
-import org.apache.tomcat.util.codec.binary.Base64;
+//import org.apache.tomcat.util.codec.binary.Base64;
 
 public class Encode {
 
@@ -12,7 +12,7 @@ public class Encode {
 		try {
 			byte[] dataByte = text.getBytes("UTF-8");
 			MessageDigest md = MessageDigest.getInstance("SHA-1");
-			result = Base64.encodeBase64String(md.digest(dataByte));
+//			result = Base64.encodeBase64String(md.digest(dataByte));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
