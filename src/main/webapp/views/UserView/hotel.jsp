@@ -78,32 +78,15 @@
 								<div class="form-group">
 									<div class="select-wrap one-third">
 										<div class="icon"><span class="ion-ios-arrow-down"></span></div>
-										<select name id class="form-control" placeholder="Keyword search">
-											<option value>Select Location</option>
-											<option value>San Francisco USA</option>
-											<option value>Berlin Germany</option>
-											<option value>Lodon United Kingdom</option>
-											<option value>Paris Italy</option>
-										</select>
+											<select id="form-location" class="form-control" placeholder="Keyword search">
+												 <option value="All">Tất cả</option>
+											    <c:forEach var="hotel" items="${listHotel}">  	
+											        <option value="${hotel.location}">${hotel.location}</option>
+											    </c:forEach>
+											</select>
 									</div>
 								</div>
-								<div class="form-group">
-									<input type="text" id="checkin_date" class="form-control" placeholder="Date from">
-								</div>
-								<div class="form-group">
-									<input type="text" id="checkin_date" class="form-control" placeholder="Date to">
-								</div>
-								<div class="form-group">
-									<div class="range-slider">
-										<span>
-											<input type="number" value="25000" min="0" max="120000" /> -
-											<input type="number" value="50000" min="0" max="120000" />
-										</span>
-										<input value="1000" min="0" max="120000" step="500" type="range" />
-										<input value="50000" min="0" max="120000" step="500" type="range" />
-										</svg>
-									</div>
-								</div>
+								
 								<div class="form-group">
 									<input type="submit" value="Search" class="btn btn-primary py-3 px-5">
 								</div>
@@ -114,7 +97,7 @@
 						<h3 class="heading mb-4">Star Rating</h3>
 						<form method="post" class="star-rating">
 							<div class="form-check">
-								<input type="checkbox" class="form-check-input" id="exampleCheck1">
+								<input type="checkbox" class="form-check-input" id="star-5">
 								<label class="form-check-label" for="exampleCheck1">
 									<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i
 												class="icon-star"></i><i class="icon-star"></i><i
@@ -122,7 +105,7 @@
 								</label>
 							</div>
 							<div class="form-check">
-								<input type="checkbox" class="form-check-input" id="exampleCheck1">
+								<input type="checkbox" class="form-check-input" id="star-4">
 								<label class="form-check-label" for="exampleCheck1">
 									<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i
 												class="icon-star"></i><i class="icon-star"></i><i
@@ -130,7 +113,7 @@
 								</label>
 							</div>
 							<div class="form-check">
-								<input type="checkbox" class="form-check-input" id="exampleCheck1">
+								<input type="checkbox" class="form-check-input" id="star-3">
 								<label class="form-check-label" for="exampleCheck1">
 									<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i
 												class="icon-star"></i><i class="icon-star-o"></i><i
@@ -138,7 +121,7 @@
 								</label>
 							</div>
 							<div class="form-check">
-								<input type="checkbox" class="form-check-input" id="exampleCheck1">
+								<input type="checkbox" class="form-check-input" id="star-2">
 								<label class="form-check-label" for="exampleCheck1">
 									<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i
 												class="icon-star-o"></i><i class="icon-star-o"></i><i
@@ -146,7 +129,7 @@
 								</label>
 							</div>
 							<div class="form-check">
-								<input type="checkbox" class="form-check-input" id="exampleCheck1">
+								<input type="checkbox" class="form-check-input" id="star-1">
 								<label class="form-check-label" for="exampleCheck1">
 									<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i
 												class="icon-star-o"></i><i class="icon-star-o"></i><i
@@ -164,23 +147,24 @@
 							<div class="destination">
 								<a href="Web_Assignment/user/hotel?id=${hotel.hotelID}"
 									class="img img-2 d-flex justify-content-center align-items-center"
-									style="background-image: url(/Web_Assignment/views/UserView/images/hotel-1.jpg);">
-									<div class="icon d-flex justify-content-center align-items-center">
+									style="background-image: url(/Web_Assignment/views/UserView/images/${hotel.imageURL});">
+									<div class="icon">
 										<span class="icon-search2"></span>
 									</div>
 								</a>
 								<div class="text p-3">
 									<div class="d-flex">
 										<div class="one">
-											<h3><a href=""Web_Assignment/user/hotel?id=${hotel.hotelID}">${hotel.name }</a></h3>
+											<h3><a href="Web_Assignment/user/hotel?id=${hotel.hotelID}">${hotel.name }</a></h3>
 											<p class="rate">
-												<i class="icon-star"></i>
-												<i class="icon-star"></i>
-												<i class="icon-star"></i>
-												<i class="icon-star"></i>
-												<i class="icon-star-o"></i>
-												
-											</p>
+					                            <c:forEach begin="1" end="${hotel.stars}">
+					                                <i class="icon-star"></i>
+					                            </c:forEach>
+					    
+					                            <c:forEach begin="${hotel.stars + 1}" end="5">
+					                                <i class="icon-star-o"></i>
+					                            </c:forEach>
+					                        </p>
 										</div>
 										<div class="two">
 											
@@ -378,6 +362,79 @@
 		        showHotelsPerPage(currentPage + 1);		
 		    }
 		});
+		
+		document.addEventListener('DOMContentLoaded', function() {
+		    // Lấy thẻ form
+		    var searchForm = document.querySelector('form');
+
+		    // Lắng nghe sự kiện submit của form
+		    searchForm.addEventListener('submit', function(event) {
+		        event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+		        
+		        // Lấy giá trị của dropdown sử dụng ID đúng
+		        var selectedLocation = document.getElementById('form-location').value;
+		        
+		        // Duyệt qua danh sách khách sạn và ẩn/hiển thị phù hợp
+		        hotels.forEach(function(hotel) {
+		            var hotelLocation = hotel.querySelector('.bottom-area span').textContent.trim();
+		            if (selectedLocation === 'All' || hotelLocation === selectedLocation) {
+		                hotel.style.display = 'block';
+		            } else {
+		                hotel.style.display = 'none';
+		            }
+		        });
+		    });
+		    
+		    // Xử lý sự kiện khi chọn lựa chọn "Tất cả"
+		    document.getElementById('form-location').addEventListener('change', function() {
+		        var selectedLocation = this.value;
+		        
+		        if (selectedLocation === 'All') {
+		            // Hiển thị tất cả khách sạn
+		            hotels.forEach(function(hotel) {
+		                hotel.style.display = 'block';
+		            });
+		        }
+		    });
+		});
+		
+		document.addEventListener('DOMContentLoaded', function() {
+		    // Lắng nghe sự kiện click của các checkbox số sao
+		    var starCheckboxes = document.querySelectorAll('.form-check-input');
+		    starCheckboxes.forEach(function(checkbox) {
+		        checkbox.addEventListener('change', filterHotelsByStars);
+		    });
+
+		    // Lấy danh sách các khách sạn và lưu trữ nó
+		    var hotelsContainer = document.querySelector('#hotelList');
+		    var hotels = hotelsContainer.querySelectorAll('.destination');
+
+		    // Hàm lọc danh sách khách sạn dựa trên số sao đã chọn
+		    function filterHotelsByStars(event) {
+		        var selectedStars = [];
+		        starCheckboxes.forEach(function(checkbox) {
+		            if (checkbox.checked) {
+		                var star = parseInt(checkbox.id.split('-')[1]);
+		                selectedStars.push(star);
+		            }
+		        });
+
+		        // Lọc danh sách khách sạn
+		        hotels.forEach(function(hotel) {
+		            var hotelStars = hotel.querySelectorAll('.rate .icon-star').length;
+		            if (selectedStars.length === 0 || selectedStars.includes(hotelStars)) {
+		                hotel.style.display = 'block';
+		            } else {
+		                hotel.style.display = 'none';
+		            }
+		        });
+		    }
+		});
+
+
+
+
+
 
 
 

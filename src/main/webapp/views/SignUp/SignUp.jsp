@@ -106,7 +106,6 @@
 <script src="/Web_Assignment/views/SignUp/js/main.js"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317" integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA==" data-cf-beacon='{"rayId":"8713fb228ff68998","b":1,"version":"2024.3.0","token":"cd0b4b3a733644fc843ef0b185f98241"}' crossorigin="anonymous"></script>
 <script>
-    // Function để kiểm tra mật khẩu xác nhận
     function validatePassword() {
         var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("password-confirm").value;
