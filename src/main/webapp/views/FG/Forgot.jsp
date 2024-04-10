@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
 <!doctype html>
 <html lang="en">
 
@@ -104,6 +105,46 @@ Your message was sent, thank you!
 <script src="/Web_Assignment/views/FG/js/jquery.validate.min.js"></script>
 <script src="/Web_Assignment/views/FG/js/main.js"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317" integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA==" data-cf-beacon='{"rayId":"8714d71cfee044af","b":1,"version":"2024.3.0","token":"cd0b4b3a733644fc843ef0b185f98241"}' crossorigin="anonymous"></script>
+<script src="https://static.stringee.com/web_phone/lastest/js/StringeeSoftPhone-lastest.js"></script>
+<script>
+    // Đợi cho trang web được tải hoàn toàn trước khi thực hiện hành động
+    document.addEventListener("DOMContentLoaded", function() {
+        // Khởi tạo Stringee SoftPhone
+        var stringeePhone = new StringeePhone();
+
+        // Thực hiện cuộc gọi khi biểu mẫu được nộp
+        var form = document.getElementById("contactForm");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            var phoneNumber = document.getElementById("phone").value;
+            callPhoneNumber(phoneNumber);
+        });
+
+        // Hàm thực hiện cuộc gọi
+        function callPhoneNumber(phoneNumber) {
+            // Lấy thông tin số điện thoại để gọi
+            var callInfo = {
+                from: 'YOUR_STRINGEE_NUMBER', // Số Stringee của bạn
+                to: phoneNumber,
+                isVideoCall: false // Có thể cấu hình là cuộc gọi video
+            };
+
+            // Thực hiện cuộc gọi
+            stringeePhone.makeCall(callInfo);
+
+            // Lắng nghe sự kiện khi cuộc gọi được kết thúc
+            stringeePhone.on('callEnded', function(event) {
+                console.log('Cuộc gọi đã kết thúc: ', event);
+            });
+
+            // Lắng nghe sự kiện khi có lỗi xảy ra trong quá trình gọi
+            stringeePhone.on('callFailed', function(event) {
+                console.error('Đã xảy ra lỗi khi thực hiện cuộc gọi: ', event);
+            });
+        }
+    });
+</script>
+
 </body>
 
 <!-- Mirrored from preview.colorlib.com/theme/bootstrap/contact-form-05/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Apr 2024 19:59:57 GMT -->

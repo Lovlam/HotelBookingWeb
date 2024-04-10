@@ -73,8 +73,8 @@ public class AccountServlet extends HttpServlet {
 
     	Account checklogin = accountService.register(account);
     	
-    	if(checklogin == null) {
-    		request.setAttribute("message", "email da ton tai");
+    	if(checklogin == null ) {
+    		request.setAttribute("message", "email da ton tai hoặc số điện thoại đã tồn tại");
     		request.getRequestDispatcher("views/SignUp/SignUp.jsp").forward(request, response);
     	}else {
 
@@ -108,12 +108,13 @@ public class AccountServlet extends HttpServlet {
     	if(account != null && account.getPhone().equals(phoneStr)) {
     		request.setAttribute("message", "đúng");
     		request.getRequestDispatcher("views/FG/Forgot.jsp").forward(request, response);
+    		
+    		
     	}else {
     		request.setAttribute("message", "sai");
     		request.getRequestDispatcher("views/FG/Forgot.jsp").forward(request, response);
     	}
     }
-
 
 
 }

@@ -8,9 +8,9 @@ public class AccountService {
 	private AccountRepository accountRepository = new AccountRepository();
 	
 	public Account register(Account account) throws Exception {
-		
+		Account accountOfPhone = accountRepository.findByPhoneNumber(account.getPhone());
 		Account accountOfEmail = accountRepository.findAccountByEmail(account.getEmail());
-		if(accountOfEmail == null) {
+		if(accountOfEmail == null && accountOfPhone == null) {
 			accountRepository.addAccount(account);
 			return account;
 		}else {
