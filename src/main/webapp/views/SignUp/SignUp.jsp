@@ -25,7 +25,7 @@
 <div class="col-md-7 col-lg-5">
 <div class="login-wrap">
 <h3 class="text-center mb-4">Create Your Account</h3>
-<form action="/Web_Assignment/register" method="post" class="signup-form" onsubmit="return validatePassword();">
+<form onsubmit="return validatePassword();">
 <div class="form-group mb-3">
 <label class="label" for="name">Full Name</label>
 <input type="text" class="form-control" placeholder="Tên của bạn" name="Name" required=>
@@ -62,7 +62,7 @@
             <span id="password-error" style="color: red;"></span> <!-- Thông báo lỗi -->
         </div>
 <div class="form-group">
-<button type="submit" class="form-control btn btn-primary submit px-3">Sign Up</button>
+<button class="form-control btn btn-primary submit px-3" id="SignUp">Sign Up</button>
 </div>
 </form>
 <p>I'm already a member!<a type="submit" href="/Web_Assignment/login">Sign In</a> </p>

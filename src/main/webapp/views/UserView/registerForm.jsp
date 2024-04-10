@@ -27,7 +27,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="/Web_Assignment/register" method="post" class="register-form">
+        <form class="register-form">
             <div class="mb-3">
                 <label for="username" class="form-label">Full Name:</label>
                 <input name="Name" id="username" class="form-control" required>
@@ -45,14 +45,45 @@
                 <input name="Phone" id="phone" type="phone" class="form-control" required>
             </div>
 			<div class="mb-3">
-                <label for="phone" class="form-label">Address:</label>
-                <input name="Address" id="phone" type="phone" class="form-control" required>
+                <label for="address" class="form-label">Address:</label>
+                <input name="Address" id="address" type="address" class="form-control" required>
             </div>
             <h1>${message}</h1>
             <hr>
-            <button type="submit" class="btn btn-success">Register</button>
-            <a type="submit" class="btn btn-success" href="/Web_Assignment/login">Sign Up</a>
-        </form>
-    </div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#otpModal">
+              Sign Up
+            </button>
+            
+            <!-- Modal -->
+			<div class="modal fade" id="otpModal" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="otpModalLabel">Enter OTP</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        <form  class="register-form">
+			            <label for="otp" class="form-label">OTP:</label>
+			            <input name="OTP" id="otp" type="text" class="form-control" required>
+			        </form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			        <button id="confirmOTPButton" type="button" class="btn btn-primary">Confirm</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+<!-- Thêm thư viện Bootstrap 5 JavaScript (cho modal) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+$('#signupButton').click(function() {
+    $('#otpModal').modal('show'); // Hiển thị modal OTP
+});
+
+</script>
 </body>
 </html>
