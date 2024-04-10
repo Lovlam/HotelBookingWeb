@@ -62,8 +62,9 @@ public class AdminServlet extends HttpServlet {
         	request.setAttribute("listHotel", showAllHotel(request, response));
         	request.setAttribute("listRoom", showAllRoom(request, response));
         	request.getRequestDispatcher("/views/viewAdmin/roomAdmin.jsp").forward(request, response);
-        }else if(path.contains("/iamges")) {
-        	request.getRequestDispatcher("/views/viewAdmin/ImgHotel.jsp").forward(request, response);
+        }else if(path.contains("/booking")) {
+        	System.out.println("GET BOOKING");
+        	request.getRequestDispatcher("/views/viewAdmin/booking.jsp").forward(request, response);
         }
         else {
         	response.setStatus(404);

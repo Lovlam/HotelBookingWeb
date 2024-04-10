@@ -51,4 +51,8 @@ private HotelRepository hotelRepository = new HotelRepository();
 		}
 		return null;
 	}
+	
+	public List<HotelRooms> showRoomsOfHotel(int hotelID) {
+		return roomRepository.findRoomByHotelID(hotelID);
+	}
 }

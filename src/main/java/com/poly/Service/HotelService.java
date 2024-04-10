@@ -47,6 +47,10 @@ public class HotelService {
 		}
 		return null;
 	}
+	
+	public Hotels getHotelById(int id) {
+		return hotelRepository.findHotelById(id);
+	}
 
 	
 	

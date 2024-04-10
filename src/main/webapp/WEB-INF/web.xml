@@ -78,4 +78,23 @@
     <filter-name>I18NFilter</filter-name>
     <url-pattern>/I18NFilter</url-pattern>
   </filter-mapping>
+  <filter>
+    <display-name>UserBlockFilter</display-name>
+    <filter-name>UserBlockFilter</filter-name>
+    <filter-class>com.poly.controller.UserBlockFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>UserBlockFilter</filter-name>
+    <url-pattern>/UserBlockFilter</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VoiceOTPServlet</display-name>
+    <servlet-name>VoiceOTPServlet</servlet-name>
+    <servlet-class>com.poly.controller.VoiceOTPServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VoiceOTPServlet</servlet-name>
+    <url-pattern>/VoiceOTPServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

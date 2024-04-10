@@ -44,7 +44,7 @@
 		<fmt:setBundle basename="global" scope="request" />
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active"><a href="/Web_Assignment/user/index" class="nav-link"><fmt:message key="menu.home"/></a></li>
-          <li class="nav-item"><a href="/Web_Assignment/user/about" class="nav-link"><fmt:message key="menu.about"/></a></li>
+          <li class="nav-item"><a href="/Web_Assignment/user/about?lang=${sessionScope.lang}" class="nav-link"><fmt:message key="menu.about"/></a></li>
           <li class="nav-item"><a href="/Web_Assignment/user/tour" class="nav-link"><fmt:message key="menu.tour"/></a></li>
           <li class="nav-item"><a href="/Web_Assignment/user/hotels" class="nav-link"><fmt:message key="menu.hotels"/></a></li>
           <li class="nav-item"><a href="/Web_Assignment/user/blog" class="nav-link"><fmt:message key="menu.blog"/></a></li>
@@ -104,7 +104,7 @@
             <span class="d-flex justify-content-md-center align-items-md-center"><a href="#">
             <img alt="Fork" src="https://cdn-icons-png.flaticon.com/128/1046/1046857.png"
             width="20" height="20"> <fmt:message key="menu.restaurant"/></a></span>
-            <span class="d-flex justify-content-md-center align-items-md-center"><a href="#">
+            <span class="d-flex justify-content-md-center align-items-md-center"><a href="/Web_Assignment/user/hotels">
             <img alt="Hotel" src="https://cdn-icons-png.flaticon.com/128/201/201426.png"
             width="20" height="20"> <fmt:message key="menu.hotel"/></a></span>
             <span class="d-flex justify-content-md-center align-items-md-center"><a href="#">
